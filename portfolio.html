@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Building a Portfolio</title>
+
+<script src="site_libs/jquery-3.5.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="site_libs/proj4js-2.3.15/proj4.js"></script>
+<link href="site_libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="site_libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="site_libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="site_libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="site_libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="site_libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="site_libs/highchart-binding-0.8.2/highchart.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css/styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mwangele Kaluba</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa-info"></span>
+     
+    Data
+  </a>
+</li>
+<li>
+  <a href="returns.html">
+    <span class="fa fa-chart-line"></span>
+     
+    Returns
+  </a>
+</li>
+<li>
+  <a href="portfolio.html">
+    <span class="fa fa-archive"></span>
+     
+    Portfolio
+  </a>
+</li>
+<li>
+  <a href="trading.html">
+    <span class="fa fa-exchange-alt"></span>
+     
+    Trading
+  </a>
+</li>
+<li>
+  <a href="forex.html">
+    <span class="fa fa-dollar-sign"></span>
+     
+    Forex
+  </a>
+</li>
+<li>
+  <a href="bitcoin.html">
+    <span class="fa fa-bitcoin"></span>
+     
+    Bitcoin
+  </a>
+</li>
+<li>
+  <a href="risk.html">
+    <span class="fa fa-bomb"></span>
+     
+    Risk
+  </a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-question-circle"></span>
+     
+    About
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Building a Portfolio</h1>
+
+</div>
+
+
+<p>We spent a lot of time on the individual assets to make sure we had a good grasp of our data building blocks.</p>
+<p>Next, we collect individual returns into a portfolio, which is a weighted set of asset returns. Accordingly, the first thing we need to do is assign a weight to each asset. Our portfolio will have the following constituents:</p>
+<ul>
+<li>ABG (Absa Group - Financials) weighted 25%</li>
+<li>AGL (Anglo American Platinum - Resources) weighted 25%</li>
+<li>GRT (Growthpoint - Property) weighted 20%</li>
+<li>MRP (Mr Price - Retail) weighted 20%</li>
+<li>NPN (Naspers - Media) weighted 10%</li>
+</ul>
+<p>We need to create a weights vector that aligns with those allocations.</p>
+<pre class="r"><code>w &lt;- c(0.25, .25, 0.20, .20, .10)</code></pre>
+<p>Before we use the weights in our calculations, have a quick sanity check in the next code chunk to make sure the weights and assets align.</p>
+<pre class="r"><code>tibble(w, symbols)</code></pre>
+<table class = kable id = 'weightsTable'>
+<thead>
+<tr>
+<th style="text-align:left;">
+w
+</th>
+<th style="text-align:left;">
+symbols
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+&lt;dbl&gt;
+</td>
+<td style="text-align:left;">
+&lt;chr&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.250
+</td>
+<td style="text-align:left;">
+SPY
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.250
+</td>
+<td style="text-align:left;">
+EFA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.200
+</td>
+<td style="text-align:left;">
+IJS
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.200
+</td>
+<td style="text-align:left;">
+EEM
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.100
+</td>
+<td style="text-align:left;">
+AGG
+</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, make sure the weights sum to 100%. We can eyeball this with 5 assets,but with 50 assets it would be better to run the sanity check to catch any errors as soon as possible</p>
+<pre class="r"><code>tibble(w, symbols) %&gt;% 
+  summarise(total_weight = sum(w))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   total_weight
+##          &lt;dbl&gt;
+## 1            1</code></pre>
+<div id="portfolio-returns-in-the-xts-world" class="section level2">
+<h2>Portfolio Returns in the xts world</h2>
+<p>We will use Return.portfolio() from PerformanceAnalytics, to calculate portfolio returns. The function requires two arguments for a portfolio, an xts object of returns and a vector of weights. It is not necessary but we are also going to set rebalance_on = “months” so we can confirm it matches our by-hand calculations above. Remember, in the by-hand calculation, we set the portfolio weights as fixed, meaning they never changed on a month-to-month basis. That is equivalent to rebalancing every month. In practice, that would be quite rare. If we want a more realistic scenario, we could choose annual rebalancing by changing the argument to rebalance_on = “years”.</p>
+<pre class="r"><code>portfolio_returns &lt;- 
+  Return.portfolio(asset_returns,
+                   weights = w,
+                   rebalance_on = &quot;months&quot;) %&gt;%
+  `colnames&lt;-`(&quot;returns&quot;)
+
+head(portfolio_returns)</code></pre>
+<pre class="r"><code>returns &lt;- data.frame(portfolio_returns[1:5,])
+colnames(returns)[1] &lt;- &quot;&quot;
+returns &lt;- kable(returns, format = &quot;html&quot;)
+returns &lt;- gsub(&quot;&lt;table&gt;&quot;, &quot;&lt;table class = kable&gt;&quot;, returns)
+returns</code></pre>
+<table class = kable>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2000-02-29
+</td>
+<td style="text-align:right;">
+-0.0715564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-03-31
+</td>
+<td style="text-align:right;">
+-0.0232258
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-04-30
+</td>
+<td style="text-align:right;">
+-0.0754615
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-05-31
+</td>
+<td style="text-align:right;">
+0.0527501
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-06-30
+</td>
+<td style="text-align:right;">
+0.0093291
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>remove(returns)</code></pre>
+</div>
+<div id="portfolio-returns-in-the-tidyverse" class="section level2">
+<h2>Portfolio Returns in the tidyverse</h2>
+<p>We begin our tidyverse work with our tidy data frame asset_returns_long. Our first task is to add a weights column to the tibble using the mutate() function. Each asset should be weighted according to the w vector. We use case_when() to assign weights by asset, so that in the case when the asset column is equal to asset 1 (ABG), we assign a weight of 0.25, or w[1], and so on.</p>
+<pre class="r"><code>asset_returns_long %&gt;%
+  group_by(asset) %&gt;%
+  mutate(weights = case_when(asset == symbols[1] ~ w[1],
+                             asset == symbols[2] ~ w[2],
+                             asset == symbols[3] ~ w[3],
+                             asset == symbols[4] ~ w[4],
+                             asset == symbols[5] ~ w[5])) %&gt;%
+  head(6)</code></pre>
+<table class = 'tibble', id = 'portTable'>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> # A tibble: 6 x 4 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> # Groups:   asset [1] </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> index </td>
+   <td style="text-align:left;"> asset </td>
+   <td style="text-align:left;"> returns </td>
+   <td style="text-align:left;"> weights </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &lt;date&gt; </td>
+   <td style="text-align:left;"> &lt;chr&gt; </td>
+   <td style="text-align:left;"> &lt;dbl&gt; </td>
+   <td style="text-align:left;"> &lt;dbl&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1 2000-02-29 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> -0.0594 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 2000-03-31 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> -0.0248 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3 2000-04-30 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> 0.00418 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4 2000-05-31 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> 0.0606 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 2000-06-30 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> 0.00781 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 6 2000-07-31 </td>
+   <td style="text-align:left;"> ABG </td>
+   <td style="text-align:left;"> -0.0196 </td>
+   <td style="text-align:left;"> 0.25 </td>
+  </tr>
+</tbody>
+</table>
+<p>Next, we need to implement the equation for portfolio returns. This task is a bit tricky but serves as a nice way to use the group_by() function with dates. We first add a new locum called weighted_returns that is the product of each asset’s monthly return and its weight. Then, we group_by() the date column because each of our weighted returns needs to be added together for each date. Once we group by date, we can use summarise(total = sum(weighted_returns)) to add up the monthly weighted returns.</p>
+<pre class="r"><code>portfolio_returns_dplyr &lt;- asset_returns_long %&gt;%
+  group_by(asset) %&gt;%
+  mutate(weights = case_when(asset == symbols[1] ~ w[1],
+                             asset == symbols[2] ~ w[2],
+                             asset == symbols[3] ~ w[3],
+                             asset == symbols[4] ~ w[4],
+                             asset == symbols[5] ~ w[5]),
+         weighted_returns = returns * weights) %&gt;%
+  group_by(index) %&gt;%
+  summarise(returns = sum(weighted_returns))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>head(portfolio_returns_dplyr, 6)</code></pre>
+<table class = 'tibble'>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+# A tibble: 6 x 2
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+index
+</td>
+<td style="text-align:left;">
+returns
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;date&gt;
+</td>
+<td style="text-align:left;">
+&lt;dbl&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-02-29
+</td>
+<td style="text-align:left;">
+-0.0716
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-03-31
+</td>
+<td style="text-align:left;">
+-0.0232
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-04-30
+</td>
+<td style="text-align:left;">
+-0.0755
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-05-31
+</td>
+<td style="text-align:left;">
+0.0528
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-06-30
+</td>
+<td style="text-align:left;">
+0.00933
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-07-31
+</td>
+<td style="text-align:left;">
+0.00270
+</td>
+</tr>
+</tbody>
+</table>
+<p>That piped workflow required some logical hoops but it useful to see how to add those weights and then group by the date for finding total returns. Think about how we would solve the puzzle of rebalancing weights not every month, but every year.</p>
+</div>
+<div id="portfolio-returns-in-the-tidyquant-world" class="section level2">
+<h2>Portfolio Returns in the tidyquant world</h2>
+<p>In tidyquant, we start again with our long, tidy-formatted asset_returns_long object, but convert to portfolio returns using tq_portfolio().</p>
+<p>The tq_portfolio function takes a tibble and then asks for an assets column to group by, a returns column to find return data, and a weights vector. It’s a wrapper for Return.portfolio() and thus also accepts the argument rebalance_on = “months”. Since we are rebalancing by months, we should again get a portfolio returns object that matches our existing objects.</p>
+<pre class="r"><code>portfolio_returns_tq_rebalanced_monthly &lt;-
+  asset_returns_long %&gt;%
+  tq_portfolio(assets_col = asset,
+               returns_col = returns,
+               weights = w,
+               col_rename = &quot;returns&quot;,
+               rebalance_on = &quot;months&quot;)</code></pre>
+<p>Let’s take a quick look and compare how the tidy tibbles of portfolio returns compare to the xts objects of portfolio returns.</p>
+<pre class="r"><code>portfolio_returns_dplyr %&gt;%
+  rename(tidyverse = returns) %&gt;%
+  mutate(tq = portfolio_returns_tq_rebalanced_monthly$returns,
+         xts =coredata(portfolio_returns)) %&gt;%
+  mutate_if(is.numeric, list(~round(., 3))) %&gt;%
+  head(6)</code></pre>
+<table class = 'tibble'>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+# A tibble: 6 x 4
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+index
+</td>
+<td style="text-align:left;">
+tidyverse
+</td>
+<td style="text-align:left;">
+tq xts[
+</td>
+<td style="text-align:left;">
+returns]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;date&gt;
+</td>
+<td style="text-align:left;">
+&lt;dbl&gt;
+</td>
+<td style="text-align:left;">
+&lt;dbl&gt;
+</td>
+<td style="text-align:left;">
+&lt;dbl&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-02-29
+</td>
+<td style="text-align:left;">
+-0.072
+</td>
+<td style="text-align:left;">
+-0.072
+</td>
+<td style="text-align:left;">
+-0.072
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-03-31
+</td>
+<td style="text-align:left;">
+-0.023
+</td>
+<td style="text-align:left;">
+-0.023
+</td>
+<td style="text-align:left;">
+-0.023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-04-30
+</td>
+<td style="text-align:left;">
+-0.075
+</td>
+<td style="text-align:left;">
+-0.075
+</td>
+<td style="text-align:left;">
+-0.075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-05-31
+</td>
+<td style="text-align:left;">
+0.053
+</td>
+<td style="text-align:left;">
+0.053
+</td>
+<td style="text-align:left;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-06-30
+</td>
+<td style="text-align:left;">
+0.009
+</td>
+<td style="text-align:left;">
+0.009
+</td>
+<td style="text-align:left;">
+0.009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2000-07-31
+</td>
+<td style="text-align:left;">
+0.003
+</td>
+<td style="text-align:left;">
+0.003
+</td>
+<td style="text-align:left;">
+0.003
+</td>
+</tr>
+</tbody>
+</table>
+<p>We have three objects of portfolio returns, calculated in three different ways, and with the same results.</p>
+</div>
+<div id="visualizing-portfolio-returns-in-the-xts-world" class="section level2">
+<h2>Visualizing Portfolio Returns in the xts world</h2>
+<p>Let us start with highcharter to visualize the xts formatted portfolio returns. First, we set highchart(type = “stock”) to get a nice time series line. Then we add our returns column from portfolio_returns. highcharter recognizes the date index so we do not need to point to it.</p>
+<pre class="r"><code>highchart(type = &quot;stock&quot;) %&gt;%
+  hc_title(text = &quot;Portfolio Monthly Returns&quot;) %&gt;%
+  hc_add_series(portfolio_returns$returns,
+                name = &quot;Rebalanced Monthly&quot;,
+                color = &quot;cornflowerblue&quot;) %&gt;%
+  hc_add_theme(hc_theme_flat()) %&gt;%
+  hc_navigator(enabled = FALSE) %&gt;%
+  hc_scrollbar(enabled = FALSE) %&gt;%
+  hc_legend(enabled = TRUE) %&gt;%
+  hc_exporting(enabled = TRUE)</code></pre>
+<div id="htmlwidget-f0951ccd9d5c74bfe9ee" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f0951ccd9d5c74bfe9ee">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Portfolio Monthly Returns"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[951782400000,-0.071556355138263],[954460800000,-0.0232257867258612],[957052800000,-0.0754615054081407],[959731200000,0.0527501322151303],[962323200000,0.00932913912665767],[965001600000,0.00269837641822002],[967680000000,0.0885627033175997],[970272000000,-0.0293987916341359],[972950400000,-0.0167849563639895],[975542400000,-0.210427211717741],[978220800000,0.0686664029351514],[980899200000,0.134214470963901],[983318400000,-0.0920992179039419],[985996800000,-0.0523786936450346],[988588800000,0.0729475415538019],[991267200000,0.0555865715459849],[993859200000,0.0647584691794039],[996537600000,-0.0332009052983359],[999216000000,0.0503503154731932],[1001808000000,-0.116128781799026],[1004486400000,0.0146066467738186],[1007078400000,0.123505728633569],[1009756800000,-0.0163152161862125],[1012435200000,-0.0952868502980722],[1014854400000,-0.00730201985661316],[1017532800000,-0.0325175351154979],[1020124800000,0.0591925595501008],[1022803200000,0.121702173845026],[1025395200000,-0.0618345948741706],[1028073600000,-0.116599903791723],[1030752000000,0.0170559498816056],[1033344000000,0.0117719931628231],[1036022400000,0.0504148949218455],[1038614400000,0.0696004637553298],[1041292800000,-0.0284371611632132],[1043971200000,-0.00915261704122672],[1046390400000,-0.0218955958393496],[1049068800000,-0.0710219239395566],[1051660800000,0.00550230360786341],[1054339200000,0.101100299176411],[1056931200000,0.0104241704481645],[1059609600000,0.0720780063089059],[1062288000000,0.0132982428507433],[1064880000000,-0.0419460304944677],[1067558400000,0.131132451973556],[1070150400000,-0.000176889959017101],[1072828800000,0.0521857960586911],[1075507200000,0.0335975447516164],[1078012800000,0.0154356120267685],[1080691200000,-0.0123713943326447],[1083283200000,-0.0150638689889997],[1085961600000,0.0179601443407018],[1088553600000,-0.00899282196453821],[1091232000000,0.0204196571387483],[1093910400000,0.0611262447131888],[1096502400000,0.0639254448645579],[1099180800000,-0.015273618107179],[1101772800000,0.125171494961893],[1104451200000,0.0428154489689885],[1107129600000,-0.00118450881408494],[1109548800000,0.0533960011206587],[1112227200000,-0.0390054595189419],[1114819200000,-0.011369605608643],[1117497600000,0.0939865135054461],[1120089600000,-0.00262245780231896],[1122768000000,0.0979742850370624],[1125446400000,0.0180932835204564],[1128038400000,0.0499600386313284],[1130716800000,-0.0108615554512526],[1133308800000,0.0374522755616844],[1135987200000,0.0945999731703835],[1138665600000,0.091557468762226],[1141084800000,0.0223599171421016],[1143763200000,0.0264043899418991],[1146355200000,0.0328900649148927],[1149033600000,-0.0467170307541581],[1151625600000,-0.0593171908340409],[1154304000000,0.00841128889042331],[1156982400000,0.0495207893972662],[1159574400000,-0.0180550806328195],[1162252800000,0.095488407552623],[1164844800000,0.0354615711437338],[1167523200000,0.0555275079141218],[1170201600000,0.0747718031665976],[1172620800000,0.0201675381027058],[1175299200000,0.036271731963516],[1177891200000,0.0391174572641988],[1180569600000,-0.00130597004477351],[1183161600000,-0.050416393010102],[1185840000000,0.0200398378918492],[1188518400000,-0.02592501155074],[1191110400000,0.0281406191216709],[1193788800000,0.0159278647200913],[1196380800000,-0.0573802034855887],[1199059200000,-0.0714525291837195],[1201737600000,-0.103346857591523],[1204243200000,0.107971123546745],[1206921600000,-0.0685643461702612],[1209513600000,-0.0242375127156945],[1212192000000,-0.0279864986636527],[1214784000000,-0.0292782532565247],[1217462400000,0.0823038170967305],[1220140800000,0.0583402064776921],[1222732800000,-0.126562430273157],[1225411200000,-0.0489036545294951],[1228003200000,0.0228877994430337],[1230681600000,0.00289007009204201],[1233360000000,-0.0717672369938747],[1235779200000,-0.114516427929864],[1238457600000,0.0594470706606811],[1241049600000,0.0780205434701],[1243728000000,0.0647974680283794],[1246320000000,0.0186967469992418],[1248998400000,0.0840741926230282],[1251676800000,0.0311504463993286],[1254268800000,-0.00721660173195871],[1256947200000,0.0867632095971493],[1259539200000,0.00593052108874548],[1262217600000,0.0258433727572924],[1264896000000,-0.0322829246753125],[1267315200000,0.0274720313249177],[1269993600000,0.0715280573721286],[1272585600000,0.00595086918404641],[1275264000000,-0.0312825361711129],[1277856000000,-0.0428651922869235],[1280534400000,0.105504963066673],[1283212800000,-0.0558235438863114],[1285804800000,0.0760563877870502],[1288483200000,0.0763045619216849],[1291075200000,-0.0244530649200625],[1293753600000,0.0711893191372921],[1296432000000,-0.057354307897084],[1298851200000,0.0288644564169021],[1301529600000,-0.00613567281659033],[1304121600000,0.031793611447049],[1306800000000,-0.00937117324052805],[1309392000000,1.86233767571764e-05],[1312070400000,-0.00747501228726632],[1314748800000,0.00203570227220484],[1317340800000,-0.0621231469487893],[1320019200000,0.0758795685757645],[1322611200000,0.0164962306211109],[1325289600000,-0.0182288604886399],[1327968000000,0.0758662014926461],[1330473600000,0.0366254144231319],[1333152000000,-0.0281583753450506],[1335744000000,0.0589468324635725],[1338422400000,-0.0630873616993555],[1341014400000,0.0298668611325241],[1343692800000,0.00692927880900074],[1346371200000,0.0458632387636175],[1348963200000,-0.0272623989787649],[1351641600000,0.0345245984198177],[1354233600000,-0.010096941972341],[1356912000000,0.056047274313862],[1359590400000,0.00659432990748798],[1362009600000,-0.0170885105870967],[1364688000000,-0.0354347749651647],[1367280000000,0.00651899403270328],[1369958400000,0.0124708363764088],[1372550400000,-0.0367683887969991],[1375228800000,0.00849294627493635],[1377907200000,0.00195644440926501],[1380499200000,0.0671049233965197],[1383177600000,0.0375421333175738],[1385769600000,-0.0575271261020144],[1388448000000,0.020728203869433],[1391126400000,-0.0249251819696499],[1393545600000,0.0611058249766891],[1396224000000,0.0324077106236145],[1398816000000,0.00362547255807688],[1401494400000,0.00548433189826891],[1404086400000,0.0410475975706279],[1406764800000,0.0658244705011555],[1409443200000,-0.0133689084804545],[1412035200000,-0.0409207080914128],[1414713600000,0.0498478107510938],[1417305600000,0.0209423792533128],[1419984000000,-0.00715336872951156],[1422662400000,0.0468658918912341],[1425081600000,0.0277806775660299],[1427760000000,-0.0605310885046372],[1430352000000,0.0180476477896061],[1433030400000,-0.0625742030895247],[1435622400000,0.0101163094801611],[1438300800000,-0.0171254279124362],[1440979200000,-0.0640719531571038],[1443571200000,-0.11070890240208],[1446249600000,0.0453533983796519],[1448841600000,-0.113418870921981],[1451520000000,-0.0960583893311274],[1454198400000,-0.0723844810994846],[1456704000000,0.119176263472418],[1459382400000,0.0769325745985985],[1461974400000,0.0731681710869636],[1464652800000,-0.0214481337712104],[1467244800000,0.0359944735565834],[1469923200000,0.0595181830901554],[1472601600000,-0.0537850903947547],[1475193600000,-0.00359232958527045],[1477872000000,0.0245490151292089],[1480464000000,0.011871126177893],[1483142400000,0.0217028266284873],[1485820800000,0.0394430077793468],[1488240000000,-0.0336364940742935],[1490918400000,-0.0276352097514443],[1493510400000,0.00126365399889061],[1496188800000,-0.0423564551668367],[1498780800000,0.0041809057729072],[1501459200000,0.0908459312422272],[1504137600000,0.0399666624092931],[1506729600000,-0.0174899855574425],[1509408000000,0.0372636113471294],[1512000000000,0.0628138817997657],[1514678400000,0.0846772455124836],[1517356800000,0.0584132338972492],[1519776000000,0.0333013879433541],[1522454400000,-0.0438848590681259],[1525046400000,0.0109472531345645],[1527724800000,-0.0578058102102147],[1530316800000,-0.00901025807117872],[1532995200000,0.0063378891644843],[1535673600000,-0.0281308748959151],[1538265600000,-0.0206455456783234],[1540944000000,-0.0268702295974652],[1543536000000,-0.00132082439393155],[1546214400000,0.0562999876443524],[1548892800000,0.0550303500809315],[1551312000000,0.00014182864666501],[1553990400000,-0.0513235197699778],[1556582400000,0.0468090721106633],[1559260800000,-0.0418629557507219],[1561852800000,0.0528911050300898],[1564531200000,-0.0821162874919675],[1567209600000,-0.0421413847363872],[1569801600000,-0.00172437840348039],[1572480000000,0.0133469877535211],[1575072000000,0.00864223604654657],[1577750400000,0.0230887560113744],[1580428800000,-0.0422321351877176],[1582934400000,-0.097957676545011],[1585612800000,-0.290919994398087],[1588204800000,0.126463797890966],[1590883200000,-0.0319744164623827],[1593475200000,0.0808063751162462],[1596153600000,-0.0336462799173749]],"name":"Rebalanced Monthly","color":"cornflowerblue"}],"navigator":{"enabled":false},"scrollbar":{"enabled":false},"legend":{"enabled":true}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>The code results in a nice and simple line chart.</p>
+<p>Let us see how well this portfolio did over time.</p>
+<pre class="r"><code>c.port &lt;- cumprod(1+portfolio_returns)
+
+highchart(type = &quot;stock&quot;) %&gt;%
+  hc_title(text = &quot;Portfolio Monthly Returns&quot;) %&gt;%
+  hc_add_series(c.port$returns,
+                name = &quot;Rebalanced Monthly&quot;,
+                color = &quot;cornflowerblue&quot;) %&gt;%
+  hc_add_theme(hc_theme_flat()) %&gt;%
+  hc_navigator(enabled = FALSE) %&gt;%
+  hc_scrollbar(enabled = FALSE) %&gt;%
+  hc_legend(enabled = TRUE) %&gt;%
+  hc_exporting(enabled = TRUE)</code></pre>
+<div id="htmlwidget-f675aae092e50fedcb1f" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f675aae092e50fedcb1f">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Portfolio Monthly Returns"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[951782400000,0.928443644861737],[954460800000,0.906879810779197],[957052800000,0.838445295033549],[959731200000,0.882673395201723],[962323200000,0.890907978108959],[965001600000,0.893311983187892],[967680000000,0.972426107325018],[970272000000,0.943837954816176],[972950400000,0.92799567592991],[975542400000,0.732720133357858],[978220800000,0.783033389273706],[980899200000,0.888127801362147],[983318400000,0.806331925457946],[985996800000,0.764097312558173],[988588800000,0.819836333017159],[991267200000,0.865408223998415],[993859200000,0.921450735799819],[996537600000,0.890857737183448],[999216000000,0.935712705292369],[1001808000000,0.827049528712895],[1004486400000,0.839129949043258],[1007078400000,0.942767304818095],[1009756800000,0.927385852426695],[1012435200000,0.839018175537962],[1014854400000,0.832891648160125],[1017532800000,0.805808064743673],[1020124800000,0.853505906601964],[1022803200000,0.957379430824993],[1025395200000,0.898180261579065],[1028073600000,0.793452529491321],[1030752000000,0.806985616067759],[1033344000000,0.816485445222605],[1036022400000,0.857648473148719],[1038614400000,0.91734120461892],[1041292800000,0.891254624941516],[1043971200000,0.883097312673204],[1046390400000,0.863761370828096],[1049068800000,0.802415376447215],[1051660800000,0.806830509468046],[1054339200000,0.888401315359921],[1056931200000,0.897662162097607],[1059609600000,0.962363861080544],[1062288000000,0.975161609415972],[1064880000000,0.934257450810376],[1067558400000,1.0567689211097],[1070150400000,1.05658198929856],[1072828800000,1.11172056151138],[1075507200000,1.14907164282805],[1078012800000,1.16680826689771],[1080691200000,1.15237322171732],[1083283200000,1.13501402247894],[1085961600000,1.15539903815139],[1088553600000,1.14500874030329],[1091232000000,1.16838942620115],[1093910400000,1.23980868418743],[1096502400000,1.31906400587105],[1099180800000,1.29891712598645],[1101772800000,1.46150452447778],[1104451200000,1.52407949686351],[1107129600000,1.5222742112661],[1109548800000,1.60355756675682],[1112227200000,1.54101006700039],[1114819200000,1.52348939029965],[1117497600000,1.66667684645645],[1120089600000,1.66230605675652],[1122768000000,1.82516930418002],[1125446400000,1.85819260987338],[1128038400000,1.9510279844471],[1130716800000,1.92983678580709],[1133308800000,2.00211356489821],[1135987200000,2.19151345442164],[1138665600000,2.39216287906685],[1141084800000,2.44565144283319],[1143763200000,2.51022737719173],[1146355200000,2.5927889185787],[1149033600000,2.47166151893042],[1151625600000,2.32504950093487],[1154304000000,2.34460616397177],[1156982400000,2.46071291203735],[1159574400000,2.41628454199629],[1162252800000,2.64701170510554],[1164844800000,2.74087889900443],[1167523200000,2.89307307376055],[1170201600000,3.10939336417836],[1172620800000,3.17210217332673],[1175299200000,3.28715981311852],[1177891200000,3.41574514662878],[1180569600000,3.4112842857867],[1183161600000,3.23929963656529],[1185840000000,3.30421467616519],[1188518400000,3.21855287251948],[1191110400000,3.30912494302801],[1193788800000,3.36183223746244],[1196380800000,3.16892961959243],[1199059200000,2.94250158346735],[1201737600000,2.63840329135792],[1204243200000,2.92327465909526],[1206921600000,2.72284224341831],[1209513600000,2.65684731992062],[1212192000000,2.58249146595214],[1214784000000,2.50688062677918],[1217462400000,2.71320647136895],[1220140800000,2.87149549712522],[1222732800000,2.50807204849063],[1225411200000,2.38541815949616],[1228003200000,2.44001513191848],[1230681600000,2.44706694667536],[1233360000000,2.27144771317344],[1235779200000,2.01132963483136],[1238457600000,2.1308972897551],[1241049600000,2.29715105438075],[1243728000000,2.44600062638335],[1246320000000,2.49173288125482],[1248998400000,2.70122331147858],[1251676800000,2.78536762345541],[1254268800000,2.76526673463984],[1256947200000,3.00519015192942],[1259539200000,3.02301249550112],[1262217600000,3.10113733427231],[1264896000000,3.0010235513022],[1267315200000,3.08346776431039],[1269993600000,3.30402222346109],[1272585600000,3.32368402749409],[1275264000000,3.21971076168266],[1277856000000,3.08169724077485],[1280534400000,3.40683159434547],[1283212800000,3.21665018132526],[1285804800000,3.46129697489141],[1288483200000,3.72540972424136],[1291075200000,3.63431203840065],[1293753600000,3.89303623794686],[1296432000000,3.66975383890115],[1298851200000,3.77567928864487],[1301529600000,3.75251295586937],[1304121600000,3.8718188947383],[1306800000000,3.83553540911975],[1309392000000,3.83560683974074],[1312070400000,3.80693563148456],[1314748800000,3.81468541899971],[1317340800000,3.57770515615179],[1320019200000,3.84917987989187],[1322611200000,3.91267683889271],[1325289600000,3.8413531986594],[1327968000000,4.13278207443331],[1330473600000,4.28414693062993],[1333152000000,4.1635123133239],[1335744000000,4.40893817611743],[1338422400000,4.13078989869061],[1341014400000,4.25416362696244],[1343692800000,4.28364191283277],[1346371200000,4.48010360465886],[1348963200000,4.35796523272244],[1351641600000,4.50842223230971],[1354233600000,4.46290095464327],[1356912000000,4.71303438868376],[1359590400000,4.74411369230808],[1362009600000,4.66304385525068],[1364688000000,4.49780994558718],[1367280000000,4.52713114178269],[1369958400000,4.58358825350641],[1372550400000,4.41505709851613],[1375228800000,4.4525539412546],[1377907200000,4.46126511551992],[1380499200000,4.76063796934845],[1383177600000,4.93936247467043],[1385769600000,4.65521514672651],[1388448000000,4.75170939534393],[1391126400000,4.63327217399809],[1393545600000,4.91639209253178],[1396224000000,5.07572110477877],[1398816000000,5.0941229923566],[1401494400000,5.12206085357729],[1404086400000,5.3323091462272],[1406764800000,5.68330557232607],[1409443200000,5.60732598026318],[1412035200000,5.37787023065144],[1414713600000,5.64594528815289],[1417305600000,5.76418481562085],[1419984000000,5.72295147620966],[1422662400000,5.99116270139248],[1425081600000,6.15760126064549],[1427760000000,5.78487495376109],[1430352000000,5.88927833943348],[1433030400000,5.52076144057104],[1435622400000,5.57661117186999],[1438300800000,5.48110931925045],[1440979200000,5.12992393969847],[1443571200000,4.56199569092829],[1446249600000,4.76889769890522],[1448841600000,4.22801470635296],[1451520000000,3.82187842359237],[1454198400000,3.54523373707532],[1456704000000,3.96774144699632],[1459382400000,4.27299001185531],[1461974400000,4.58563687609563],[1464652800000,4.48728352295093],[1467244800000,4.64880093105868],[1469923200000,4.92548911602312],[1472601600000,4.66057123867943],[1475193600000,4.64382893073447],[1477872000000,4.75783035741252],[1480464000000,4.81431116191838],[1483142400000,4.91879532240108],[1485820800000,5.11280740456756],[1488240000000,4.94083048860082],[1490918400000,4.80428960170201],[1493510400000,4.81036056146903],[1496188800000,4.60661074001085],[1498780800000,4.62587054544729],[1501459200000,5.04611206295444],[1504137600000,5.247788320254],[1506729600000,5.15600457832425],[1509408000000,5.34813592903494],[1512000000000,5.68407310713042],[1514678400000,6.16538476113381],[1517356800000,6.52552482325245],[1519776000000,6.74283385692557],[1522454400000,6.44692554339461],[1525046400000,6.51750166925784],[1527724800000,6.14075220471996],[1530316800000,6.08542244260427],[1532995200000,6.12399117556456],[1535673600000,5.95171794594107],[1538265600000,5.82884148122365],[1540944000000,5.67221917233594],[1543536000000,5.66472716688539],[1546214400000,5.98365123638966],[1548892800000,6.31293365869039],[1551312000000,6.31382901352768],[1553990400000,5.98978108532764],[1556582400000,6.27015718007782],[1559260800000,6.00766986749816],[1561852800000,6.32542216544611],[1564531200000,5.80600198040027],[1567209600000,5.561329017164],[1569801600000,5.55173918151215],[1572480000000,5.62583817637854],[1575072000000,5.67445799785847],[1577750400000,5.80547417406782],[1580428800000,5.56029660391978],[1582934400000,5.01562286769869],[1585612800000,3.55647789112487],[1588204800000,4.00624359235177],[1590883200000,3.87814629128016],[1593475200000,4.19152523524903],[1596153600000,4.0504960039031]],"name":"Rebalanced Monthly","color":"cornflowerblue"}],"navigator":{"enabled":false},"scrollbar":{"enabled":false},"legend":{"enabled":true}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>Now let us compare that to the jse in the same time frame</p>
+<pre><code>## Using column `Date` for date_var.</code></pre>
+<pre class="r"><code>highchart(type = &quot;stock&quot;) %&gt;%
+  hc_title(text = &quot;Cumulative Returns&quot;) %&gt;%
+  hc_add_series(c.port[, 1], name = &quot;portfolio&quot;) %&gt;%
+  hc_add_series(c.jse[, 1], name = &quot;JSE&quot;) %&gt;%
+  hc_add_theme(hc_theme_flat()) %&gt;%
+  hc_navigator(enabled = FALSE) %&gt;%
+  hc_scrollbar(enabled = FALSE) %&gt;%
+  hc_exporting(enabled = TRUE) %&gt;%
+  hc_legend(enabled = TRUE)</code></pre>
+<div id="htmlwidget-4fcc2eddadf8388629f2" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4fcc2eddadf8388629f2">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Cumulative Returns"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[951782400000,0.928443644861737],[954460800000,0.906879810779197],[957052800000,0.838445295033549],[959731200000,0.882673395201723],[962323200000,0.890907978108959],[965001600000,0.893311983187892],[967680000000,0.972426107325018],[970272000000,0.943837954816176],[972950400000,0.92799567592991],[975542400000,0.732720133357858],[978220800000,0.783033389273706],[980899200000,0.888127801362147],[983318400000,0.806331925457946],[985996800000,0.764097312558173],[988588800000,0.819836333017159],[991267200000,0.865408223998415],[993859200000,0.921450735799819],[996537600000,0.890857737183448],[999216000000,0.935712705292369],[1001808000000,0.827049528712895],[1004486400000,0.839129949043258],[1007078400000,0.942767304818095],[1009756800000,0.927385852426695],[1012435200000,0.839018175537962],[1014854400000,0.832891648160125],[1017532800000,0.805808064743673],[1020124800000,0.853505906601964],[1022803200000,0.957379430824993],[1025395200000,0.898180261579065],[1028073600000,0.793452529491321],[1030752000000,0.806985616067759],[1033344000000,0.816485445222605],[1036022400000,0.857648473148719],[1038614400000,0.91734120461892],[1041292800000,0.891254624941516],[1043971200000,0.883097312673204],[1046390400000,0.863761370828096],[1049068800000,0.802415376447215],[1051660800000,0.806830509468046],[1054339200000,0.888401315359921],[1056931200000,0.897662162097607],[1059609600000,0.962363861080544],[1062288000000,0.975161609415972],[1064880000000,0.934257450810376],[1067558400000,1.0567689211097],[1070150400000,1.05658198929856],[1072828800000,1.11172056151138],[1075507200000,1.14907164282805],[1078012800000,1.16680826689771],[1080691200000,1.15237322171732],[1083283200000,1.13501402247894],[1085961600000,1.15539903815139],[1088553600000,1.14500874030329],[1091232000000,1.16838942620115],[1093910400000,1.23980868418743],[1096502400000,1.31906400587105],[1099180800000,1.29891712598645],[1101772800000,1.46150452447778],[1104451200000,1.52407949686351],[1107129600000,1.5222742112661],[1109548800000,1.60355756675682],[1112227200000,1.54101006700039],[1114819200000,1.52348939029965],[1117497600000,1.66667684645645],[1120089600000,1.66230605675652],[1122768000000,1.82516930418002],[1125446400000,1.85819260987338],[1128038400000,1.9510279844471],[1130716800000,1.92983678580709],[1133308800000,2.00211356489821],[1135987200000,2.19151345442164],[1138665600000,2.39216287906685],[1141084800000,2.44565144283319],[1143763200000,2.51022737719173],[1146355200000,2.5927889185787],[1149033600000,2.47166151893042],[1151625600000,2.32504950093487],[1154304000000,2.34460616397177],[1156982400000,2.46071291203735],[1159574400000,2.41628454199629],[1162252800000,2.64701170510554],[1164844800000,2.74087889900443],[1167523200000,2.89307307376055],[1170201600000,3.10939336417836],[1172620800000,3.17210217332673],[1175299200000,3.28715981311852],[1177891200000,3.41574514662878],[1180569600000,3.4112842857867],[1183161600000,3.23929963656529],[1185840000000,3.30421467616519],[1188518400000,3.21855287251948],[1191110400000,3.30912494302801],[1193788800000,3.36183223746244],[1196380800000,3.16892961959243],[1199059200000,2.94250158346735],[1201737600000,2.63840329135792],[1204243200000,2.92327465909526],[1206921600000,2.72284224341831],[1209513600000,2.65684731992062],[1212192000000,2.58249146595214],[1214784000000,2.50688062677918],[1217462400000,2.71320647136895],[1220140800000,2.87149549712522],[1222732800000,2.50807204849063],[1225411200000,2.38541815949616],[1228003200000,2.44001513191848],[1230681600000,2.44706694667536],[1233360000000,2.27144771317344],[1235779200000,2.01132963483136],[1238457600000,2.1308972897551],[1241049600000,2.29715105438075],[1243728000000,2.44600062638335],[1246320000000,2.49173288125482],[1248998400000,2.70122331147858],[1251676800000,2.78536762345541],[1254268800000,2.76526673463984],[1256947200000,3.00519015192942],[1259539200000,3.02301249550112],[1262217600000,3.10113733427231],[1264896000000,3.0010235513022],[1267315200000,3.08346776431039],[1269993600000,3.30402222346109],[1272585600000,3.32368402749409],[1275264000000,3.21971076168266],[1277856000000,3.08169724077485],[1280534400000,3.40683159434547],[1283212800000,3.21665018132526],[1285804800000,3.46129697489141],[1288483200000,3.72540972424136],[1291075200000,3.63431203840065],[1293753600000,3.89303623794686],[1296432000000,3.66975383890115],[1298851200000,3.77567928864487],[1301529600000,3.75251295586937],[1304121600000,3.8718188947383],[1306800000000,3.83553540911975],[1309392000000,3.83560683974074],[1312070400000,3.80693563148456],[1314748800000,3.81468541899971],[1317340800000,3.57770515615179],[1320019200000,3.84917987989187],[1322611200000,3.91267683889271],[1325289600000,3.8413531986594],[1327968000000,4.13278207443331],[1330473600000,4.28414693062993],[1333152000000,4.1635123133239],[1335744000000,4.40893817611743],[1338422400000,4.13078989869061],[1341014400000,4.25416362696244],[1343692800000,4.28364191283277],[1346371200000,4.48010360465886],[1348963200000,4.35796523272244],[1351641600000,4.50842223230971],[1354233600000,4.46290095464327],[1356912000000,4.71303438868376],[1359590400000,4.74411369230808],[1362009600000,4.66304385525068],[1364688000000,4.49780994558718],[1367280000000,4.52713114178269],[1369958400000,4.58358825350641],[1372550400000,4.41505709851613],[1375228800000,4.4525539412546],[1377907200000,4.46126511551992],[1380499200000,4.76063796934845],[1383177600000,4.93936247467043],[1385769600000,4.65521514672651],[1388448000000,4.75170939534393],[1391126400000,4.63327217399809],[1393545600000,4.91639209253178],[1396224000000,5.07572110477877],[1398816000000,5.0941229923566],[1401494400000,5.12206085357729],[1404086400000,5.3323091462272],[1406764800000,5.68330557232607],[1409443200000,5.60732598026318],[1412035200000,5.37787023065144],[1414713600000,5.64594528815289],[1417305600000,5.76418481562085],[1419984000000,5.72295147620966],[1422662400000,5.99116270139248],[1425081600000,6.15760126064549],[1427760000000,5.78487495376109],[1430352000000,5.88927833943348],[1433030400000,5.52076144057104],[1435622400000,5.57661117186999],[1438300800000,5.48110931925045],[1440979200000,5.12992393969847],[1443571200000,4.56199569092829],[1446249600000,4.76889769890522],[1448841600000,4.22801470635296],[1451520000000,3.82187842359237],[1454198400000,3.54523373707532],[1456704000000,3.96774144699632],[1459382400000,4.27299001185531],[1461974400000,4.58563687609563],[1464652800000,4.48728352295093],[1467244800000,4.64880093105868],[1469923200000,4.92548911602312],[1472601600000,4.66057123867943],[1475193600000,4.64382893073447],[1477872000000,4.75783035741252],[1480464000000,4.81431116191838],[1483142400000,4.91879532240108],[1485820800000,5.11280740456756],[1488240000000,4.94083048860082],[1490918400000,4.80428960170201],[1493510400000,4.81036056146903],[1496188800000,4.60661074001085],[1498780800000,4.62587054544729],[1501459200000,5.04611206295444],[1504137600000,5.247788320254],[1506729600000,5.15600457832425],[1509408000000,5.34813592903494],[1512000000000,5.68407310713042],[1514678400000,6.16538476113381],[1517356800000,6.52552482325245],[1519776000000,6.74283385692557],[1522454400000,6.44692554339461],[1525046400000,6.51750166925784],[1527724800000,6.14075220471996],[1530316800000,6.08542244260427],[1532995200000,6.12399117556456],[1535673600000,5.95171794594107],[1538265600000,5.82884148122365],[1540944000000,5.67221917233594],[1543536000000,5.66472716688539],[1546214400000,5.98365123638966],[1548892800000,6.31293365869039],[1551312000000,6.31382901352768],[1553990400000,5.98978108532764],[1556582400000,6.27015718007782],[1559260800000,6.00766986749816],[1561852800000,6.32542216544611],[1564531200000,5.80600198040027],[1567209600000,5.561329017164],[1569801600000,5.55173918151215],[1572480000000,5.62583817637854],[1575072000000,5.67445799785847],[1577750400000,5.80547417406782],[1580428800000,5.56029660391978],[1582934400000,5.01562286769869],[1585612800000,3.55647789112487],[1588204800000,4.00624359235177],[1590883200000,3.87814629128016],[1593475200000,4.19152523524903],[1596153600000,4.0504960039031]],"name":"portfolio"},{"data":[[951782400000,0.937436497168725],[954460800000,0.941333955122451],[956880000000,0.87842129998224],[959731200000,0.868816591137814],[962323200000,0.916307345850464],[965001600000,0.922514766484761],[967680000000,1.01207656221495],[970185600000,0.986068943687411],[972950400000,0.971293397880199],[975542400000,0.931662798606774],[978048000000,0.986366145998823],[980899200000,1.080370270587],[983318400000,1.07721823469076],[985910400000,0.977848762683955],[988588800000,1.07553288011994],[991267200000,1.12005402799742],[993772800000,1.09818549531906],[996537600000,1.02160395013284],[999216000000,1.07363972555904],[1001635200000,0.966254248120437],[1004486400000,1.02371940235756],[1007078400000,1.13614161327697],[1009756800000,1.26150058171916],[1012435200000,1.24666946149599],[1014854400000,1.31200564442764],[1017273600000,1.32889060176219],[1020124800000,1.32800141110691],[1022803200000,1.35130642162376],[1025222400000,1.28760243512593],[1028073600000,1.11620247934384],[1030665600000,1.16914798379643],[1033344000000,1.1435438838543],[1036022400000,1.13277936111168],[1038528000000,1.15543318445028],[1041292800000,1.12081757214707],[1043971200000,1.06296339699826],[1046390400000,1.01508966207131],[1049068800000,0.927836620882208],[1051660800000,0.907361073021158],[1054252800000,1.0346905169508],[1056931200000,1.00906225421913],[1059609600000,1.06432617832864],[1062115200000,1.11465364453395],[1064880000000,1.07834784510202],[1067558400000,1.17978444375446],[1069977600000,1.17547138582055],[1072828800000,1.25492105412586],[1075420800000,1.31074072239492],[1077840000000,1.31637186049855],[1080691200000,1.29181038492532],[1083283200000,1.25474949832008],[1085961600000,1.25813349699596],[1088553600000,1.22126108014918],[1091145600000,1.24509525575709],[1093910400000,1.34833681478859],[1096502400000,1.4208928392365],[1099008000000,1.40812401310107],[1101772800000,1.50906165014939],[1104451200000,1.52912522244868],[1107129600000,1.54624335070235],[1109548800000,1.62816003982028],[1112227200000,1.6066539489851],[1114732800000,1.51693509512286],[1117497600000,1.66566431361368],[1120089600000,1.71008881033298],[1122595200000,1.8295629313813],[1125446400000,1.8622273984287],[1128038400000,2.03881389698678],[1130716800000,1.98534768441947],[1133308800000,2.02659839873194],[1135900800000,2.1863144376292],[1138665600000,2.38549072813358],[1141084800000,2.30577647728275],[1143763200000,2.45877405254682],[1146182400000,2.55346440035809],[1149033600000,2.48459440945538],[1151625600000,2.5658309160476],[1154304000000,2.5232681622628],[1156982400000,2.65232524564496],[1159488000000,2.70316133857022],[1162252800000,2.81957524232258],[1164844800000,2.89348800740348],[1167350400000,3.01010367044855],[1170201600000,3.07444072203248],[1172620800000,3.11651538746845],[1175212800000,3.29426290806421],[1177891200000,3.40340139588435],[1180569600000,3.45863632464641],[1183075200000,3.4235314158549],[1185840000000,3.45066502037527],[1188518400000,3.46257002678445],[1190937600000,3.61948801465232],[1193788800000,3.78570384393738],[1196380800000,3.66160496497],[1199059200000,3.49852667390745],[1201737600000,3.30029152405587],[1204243200000,3.70581562100182],[1206921600000,3.57458388656054],[1209513600000,3.71424239385589],[1212105600000,3.84686952939343],[1214784000000,3.67436654226857],[1217462400000,3.34892276243508],[1219968000000,3.34679522881558],[1222732800000,2.87971763364137],[1225411200000,2.53609256281419],[1227830400000,2.56240221621106],[1230681600000,2.59861136448481],[1233273600000,2.48514894547546],[1235692800000,2.23086941341204],[1238457600000,2.46024435829068],[1241049600000,2.49444920317161],[1243555200000,2.75100849442867],[1246320000000,2.66387747532677],[1248998400000,2.93076635911463],[1251676800000,3.01182164478525],[1254268800000,3.00957812977593],[1256860800000,3.18472210979813],[1259539200000,3.24925971253529],[1262217600000,3.34249304413696],[1264723200000,3.22282682891175],[1267142400000,3.23353819351737],[1269993600000,3.47310621116587],[1272585600000,3.45959921180981],[1275264000000,3.27953810411505],[1277856000000,3.1724317068957],[1280448000000,3.42570485877454],[1283212800000,3.29264762558308],[1285804800000,3.55870047685265],[1288310400000,3.67647716193539],[1291075200000,3.65660326753403],[1293753600000,3.88040989756186],[1296432000000,3.79340694124455],[1298851200000,3.89891859435388],[1301529600000,3.8906996214899],[1304035200000,3.96707457482552],[1306800000000,3.93439440196492],[1309392000000,3.84968086995708],[1311897600000,3.77036651327323],[1314748800000,3.74589685630027],[1317340800000,3.58505724768913],[1320019200000,3.90815482065774],[1322611200000,3.9642245737986],[1325203200000,3.86431506344545],[1327968000000,4.08260291234103],[1330473600000,4.14343515130135],[1333065600000,4.05381657301572],[1335744000000,4.15588382047531],[1338422400000,4.00408955213062],[1340928000000,4.07243400236071],[1343692800000,4.1797880681729],[1346371200000,4.27553916244523],[1348790400000,4.32006272660166],[1351641600000,4.48899686971062],[1354233600000,4.60356836076012],[1356912000000,4.74197644369647],[1359590400000,4.89090138078261],[1362009600000,4.79746870616719],[1364428800000,4.81574544017958],[1367280000000,4.67972826526877],[1369958400000,5.07617319404291],[1372377600000,4.78158650459879],[1375228800000,4.98875101332699],[1377820800000,5.10177246142713],[1380499200000,5.31965920801625],[1383177600000,5.49915611457512],[1385683200000,5.43368824444045],[1388448000000,5.58839775334383],[1391126400000,5.45258717028364],[1393545600000,5.71799366693286],[1396224000000,5.77139343182892],[1398816000000,5.90418970689328],[1401408000000,5.99632242343114],[1404086400000,6.15489797866184],[1406764800000,6.20936211443739],[1409270400000,6.15656037858259],[1412035200000,5.96051437746385],[1414713600000,6.00721742523731],[1417132800000,6.02998964624468],[1419984000000,6.01298266682292],[1422576000000,6.19374570355399],[1424995200000,6.44472339042598],[1427760000000,6.30430737967837],[1430352000000,6.57716326434455],[1432857600000,6.31504894777092],[1435622400000,6.25900214928013],[1438300800000,6.28876104088465],[1440979200000,6.03735446449822],[1443571200000,6.05143291382704],[1446163200000,6.49903409248791],[1448841600000,6.23494567600841],[1451520000000,6.12451327080809],[1454025600000,5.93703177044384],[1456704000000,5.97005867933441],[1459382400000,6.31256259672667],[1461888000000,6.39798289032872],[1464652800000,6.51250122324122],[1467244800000,6.30862889458862],[1469750400000,6.37868407031855],[1472601600000,6.37089640324796],[1475193600000,6.2762640461316],[1477872000000,6.11198728070758],[1480464000000,6.06599945150468],[1483056000000,6.11965413383044],[1485820800000,6.37754117037304],[1488240000000,6.17915621122628],[1490918400000,6.28909811179881],[1493337600000,6.50188167723587],[1496188800000,6.47110553219148],[1498780800000,6.23532986436218],[1501459200000,6.66982514597345],[1504137600000,6.82865924305229],[1506643200000,6.71482954964185],[1509408000000,7.12561992656928],[1512000000000,7.22139155921273],[1514505600000,7.18899409098982],[1517356800000,7.18916927121402],[1519776000000,7.04648437452807],[1522281600000,6.70209575955125],[1525046400000,7.03573676573813],[1527724800000,6.78465638701057],[1530230400000,6.96020992631557],[1532995200000,6.93864222036706],[1535673600000,7.08797067603861],[1538092800000,6.73036018262236],[1540944000000,6.32930620174238],[1543536000000,6.12091059888682],[1546214400000,6.37134824741247],[1548892800000,6.54289076365288],[1551312000000,6.76583236581497],[1553817600000,6.82146356432557],[1556582400000,7.07104705824078],[1559260800000,6.72334572481724],[1561680000000,7.03183568336597],[1564531200000,6.86037290433106],[1567123200000,6.67612680148698],[1569801600000,6.62362105980411],[1572480000000,6.81694029012261],[1574985600000,6.68693240097183],[1577750400000,6.89655547353631],[1580428800000,6.77519061420603],[1582848000000,6.16612401068478],[1585612800000,5.37504998677087],[1588204800000,6.08137785891105],[1590710400000,6.0990505231848],[1593475200000,6.56773131944537],[1596153600000,6.73197063254559]],"name":"JSE"}],"navigator":{"enabled":false},"scrollbar":{"enabled":false},"legend":{"enabled":true}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>The JSE outperforms our portfolio, looks like stock picking is hard, even with the benefit of hindsight. To be fair, our weighting scheme also has a lot to do with this. Overweighting Naspers might change this drastically.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

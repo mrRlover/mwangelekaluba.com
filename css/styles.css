@@ -1,0 +1,155 @@
+p {
+    text-align: justify;
+    text-align-last: left;
+}
+
+
+pre.r {
+    color: #f1f1f1;
+    background-color: #1e0a03;
+}
+
+
+.navbar.navbar-default.navbar-fixed-top {
+    background-color: #12326b;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+  color: #7fa5e9;
+  background-color: transparent
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #7fa5e9;
+  background-color: transparent
+}
+
+a {
+    color: #7fa5e9;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #7fa5e9;
+  text-decoration: underline
+}
+
+.hljs-literal {
+  color: rgb(255, 34, 255, 1);
+}
+
+.hljs-number {
+  color: rgb(66,222,244);
+}
+
+.hljs-comment {
+  color: rgb(76, 136, 107);
+}
+
+.hljs-keyword {
+  color: rgb(246,88,72);
+  /* rgb(175,72,246) */
+}
+
+.hljs-string {
+  color: rgb(5,180,12);
+}
+
+.kable {
+    width: 100%;
+}
+
+.kable th {
+    background-color: #8a2d0d;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.kable tr:nth-child(even) {
+    background-color: #ee7146;
+    color: #f1f1f1;
+}
+
+.kable tr:nth-child(odd) {
+    background-color: #ffffff;
+    color: #1e0a03;
+}
+
+.kable td:not(:first-child) {
+    text-align: center;
+    text-align-last: center;
+}
+
+.kable th:not(:first-child) {
+    text-align: center;
+    text-align-last: center;
+}
+
+#weightsTable tr:first-child td {
+    font-style: italic;
+}
+
+table#portTable {background-color: #fcfcfc}
+
+.tibble tr:first-child td:first-child, 
+.tibble tr:nth-child(2) td:nth-child(1) {
+    color: #cccccc;
+    font-style: italic;
+}
+
+.tibble {
+    width: 100%;
+}
+
+.tibble tr:nth-child(3) {
+    background-color: #8a2d0d;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.tibble tr:nth-child(4) {
+    font-style: italic;
+}
+
+.tibble tr:nth-child(even):not(:nth-child(2)) {
+    background-color: #ee7146;
+    color: #f1f1f1;
+}
+
+.tibble tr:nth-child(odd):not(:nth-child(3)) {
+    background-color: #ffffff;
+    color: #1e0a03;
+}
+
+.tibble td:not(:first-child) {
+    text-align: center;
+    text-align-last: center;
+}
+
+.tibble tr:nth-child(4) {
+    color: #cccccc!important;
+}
+p.libs {
+    background-color: #f6b6a0;
+}
+
+
+
+.na-data {
+    font-style: italic;
+    color: #f9c312;
+}
+
+#headers {
+    background-color: #bf3e11;
+    /* height: 45px; */
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+}
+
+.caption {
+    font-weight: bold;
+}

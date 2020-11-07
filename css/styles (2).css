@@ -1,0 +1,364 @@
+body {
+  font-family: "Montserrat Regular";
+  background: #e8f0fc;
+}
+
+p {
+    text-align: justify;
+    text-align-last: left;
+}
+
+.navbar.navbar-default.navbar-fixed-top {
+    background-color: #12326b;
+}
+
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.title.toc-ignore {
+    margin-top: -2vh;
+    position: relative;
+    top: -5vh;
+    text-align: center;
+}
+
+.author {
+    position: relative;
+    top: -5vh;
+    text-align: center;
+}
+
+.main-container {
+    min-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #ffffff;
+    background-color: #12326b;
+    border-bottom: 2px solid #ffffff;
+}
+
+pre.r {
+    color: #f1f1f1;
+    background-color: #2c3e50;
+}
+
+.hljs-keyword {
+    color: rgb(255,20,137);
+}
+
+.hljs-string {
+    color: rgb(24, 188, 156);
+}
+
+.hljs-literal {
+    color: rgb(141,252,5);
+}
+
+.hljs-number {
+    color: rgb(255,255,26);
+}
+
+.hljs-comment {
+    color: rgb(76, 136, 107);
+    font-style: italic;
+}
+
+.pretty-table {
+    width: 100%;
+}
+
+.pretty-table th {
+    background-color: #2c3e50;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+.pretty-table tr:nth-child(odd) {
+    background-color: #18bc9c;
+    color: #f1f1f1;
+}
+
+.pretty-table tr:nth-child(even) {
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+.pretty-table td:not(:first-child) {
+    text-align: center;
+    text-align-last: center;
+}
+
+.pretty-table th:not(:first-child) {
+    text-align: center;
+    text-align-last: center;
+}
+
+.na-data {
+    font-style: italic;
+    color: #f9c312;
+}
+
+#header {
+    background-color: none;
+    /* height: 45px; */
+    color: #fff;
+    position: relative;
+    top: 15vh;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #ffffff;
+    background-color: #12326b;
+    border-bottom: 2px solid #ffffff;
+    height: 50px;
+}
+
+a {
+    text-align: end;
+}
+
+.caption {
+    font-weight: bold;
+}
+
+.stargazer {
+    width: 100%;
+}
+
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column.img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column.img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.img-container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.column > p > img {
+    transition: -webkit-transform 0.25s ease;
+}
+
+.column > p > img:active {
+    -webkit-transform: scale(2.75);
+}
+
+.main-content {
+  width: 80%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+svg {
+  width: 100%;
+  position: relative;
+  top: -12vh;
+  height: 35vh;
+  z-index: -1;  
+}
+
+.home-container {
+    background-color: #fff;
+    border-radius: 20px;
+    width: 80%;
+    height: 35vh;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: -10vh;
+}
+
+.home-text {
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: justify;
+    position: relative;
+    top: 5vh;
+}
+
+.card-body {
+    margin-left: 20px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: white;
+  border: 4px solid #FF9F55;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+/* Place the timelime to the left */
+  .timeline::after {
+    left: 31px;
+  }
+
+/* Full-width containers */
+  .container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+/* Make sure that all arrows are pointing leftwards */
+  .container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+/* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+    left: 15px;
+  }
+
+/* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
+  }
+}
