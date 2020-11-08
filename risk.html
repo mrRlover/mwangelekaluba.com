@@ -11,9 +11,9 @@
 
 
 
-<title>Empirical Tests</title>
+<title>Risk Management</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-3.5.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -22,6 +22,50 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="site_libs/proj4js-2.3.15/proj4.js"></script>
+<link href="site_libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="site_libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="site_libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="site_libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="site_libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="site_libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="site_libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="site_libs/highchart-binding-0.8.2/highchart.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -32,7 +76,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -358,133 +402,345 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Empirical Tests</h1>
+<h1 class="title toc-ignore">Risk Management</h1>
 
 </div>
 
 
-<div id="capm-betas" class="section level2">
-<h2>CAPM Betas</h2>
-<p>Let us find the betas of each stock and the beta of our portfolio.</p>
-<pre class="r"><code>betas &lt;- lm(sweep(asset_returns, 1, rfr) ~ jse - rfr)
-betas$coefficients</code></pre>
-<table class = 'kable'>
+<p>In this section, I’ll cover two simple risk management techniques, namely Value at Risk (VaR) and Expected Shortfall (ES).</p>
+<div id="var-and-es-historical-simulation" class="section level2">
+<h2>VaR and ES Historical Simulation</h2>
+<p>VaR is calculated as follows:</p>
+<p><span class="math display">\[ VaR(\alpha) = \mu + \sigma*N^{-1}(\alpha) \]</span></p>
+<p>Where <span class="math inline">\(\alpha\)</span> is chosen level of confidence, <span class="math inline">\(\mu\)</span> is the historical mean of the series, <span class="math inline">\(\sigma\)</span> is the historical standard deviation, and <span class="math inline">\(N^{-1}\)</span> is the inverse probability distribution function (PDF) corresponding to one quantile of a given normal distribution.</p>
+<p>ES is given by the formula below:</p>
+<p><span class="math display">\[ ES = \mu + \sigma\frac{e^{-Y^{2}/2}}{\sqrt{2\pi}(1-\alpha)} \]</span> Where <span class="math inline">\(Y\)</span> is the point on the standard normal distribution (with mean 0 and standard deviation 1), where the probability of X being greater is 1 - <span class="math inline">\(\alpha\)</span>.</p>
+<p>The code below shows the R implementation of both VaR and ES:</p>
+<pre class="r"><code>rVaR &lt;- function(x, p=0.95, mu = TRUE) {
+  if(mu) {colMeans(x) + qnorm(1-p, mean = colMeans(x), sd = matrixStats::colSds(x))} else {
+    qnorm(1-p, mean = 0, sd = matrixStats::colSds(x))
+  }
+}
+
+rES &lt;- function(x, p=0.95, mu = TRUE) {
+  if(mu) {-(colMeans(x) + matrixStats::colSds(x) * exp(-qnorm(1-p)^2/2)/(sqrt(2*pi)*(1-p)))} else {
+  -(matrixStats::colSds(x) * exp(-qnorm(1-p)^2/2)/(sqrt(2*pi)*(1-p)))
+  }
+}</code></pre>
+<p>Calculating VaR is straightforward using the following inputs:</p>
+<table>
 <thead>
 <tr>
 <th style="text-align:left;">
 </th>
 <th style="text-align:right;">
-ABG
+Mean
 </th>
 <th style="text-align:right;">
-AGL
+Std.Dev
 </th>
 <th style="text-align:right;">
-GRT
-</th>
-<th style="text-align:right;">
-MRP
-</th>
-<th style="text-align:right;">
-NPN
+alpha
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-(Intercept)
+Momentum
 </td>
 <td style="text-align:right;">
--0.0086977
+0.0168766
 </td>
 <td style="text-align:right;">
--0.0136598
+0.0560114
 </td>
 <td style="text-align:right;">
--0.0057876
-</td>
-<td style="text-align:right;">
--0.0012062
-</td>
-<td style="text-align:right;">
-0.0005591
+0.99
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-jse
+Low Volatility
 </td>
 <td style="text-align:right;">
-0.7709306
+0.0090158
 </td>
 <td style="text-align:right;">
-1.5105129
+0.0269038
 </td>
 <td style="text-align:right;">
-0.3890343
-</td>
-<td style="text-align:right;">
-0.7143723
-</td>
-<td style="text-align:right;">
-1.1117652
+0.99
 </td>
 </tr>
 </tbody>
 </table>
-<p>Naspers and Anglo American are more risky than the market, while Absa, Growthpoint and Mr Price are less risky than the market. The beta for GRT is remarkably low!</p>
-<p>Now let us calculate out portfolio beta.</p>
-<pre class="r"><code>port_beta &lt;- lm(coredata(portfolio_returns) - coredata(rfr) ~ coredata(jse) - coredata(rfr))
-port_beta$coefficients</code></pre>
-<table class = 'kable'>
+</div>
+<div id="var-and-es-on-31-july-2020" class="section level2">
+<h2>VaR and ES on 31 July, 2020</h2>
+<p>The VaR and ES for low volatility and momentum using past 100 days on 31 July, 2020 is given the table below:</p>
+<pre class="r"><code>VaR_ES &lt;- rbind(rVaR(strategies, p = 0.99),
+                 rES(strategies, p = 0.99)
+                 ) %&gt;% as.data.frame()
+
+VaR_ES &lt;- cbind(Date = dmy(&quot;01-10-2020&quot;), VaR_ES) %&gt;% 
+  `rownames&lt;-`(c(&quot;VaR&quot;, &quot;ES&quot;))
+
+VaR_ES</code></pre>
+<table class = 'rTable' id = 'varTable'>
+</strong>
 <thead>
 <tr>
 <th style="text-align:left;">
 </th>
+<th style="text-align:left;">
+Date
+</th>
 <th style="text-align:right;">
-x
+Momentum
+</th>
+<th style="text-align:right;">
+Low Volatility
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-(Intercept)
+VaR
+</td>
+<td style="text-align:left;">
+2020-10-01
 </td>
 <td style="text-align:right;">
--0.0069322
+-0.0965488
+</td>
+<td style="text-align:right;">
+-0.0445559
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-coredata(jse)
+ES
+</td>
+<td style="text-align:left;">
+2020-10-01
 </td>
 <td style="text-align:right;">
-0.9022187
+-0.1661591
+</td>
+<td style="text-align:right;">
+-0.0807201
 </td>
 </tr>
 </tbody>
 </table>
-<p>Our portfolio beta is less than the market. I suppose then that in this case, it makes sense that our portfolio performs worse than the market. Actually, while we are on the subject, let us test that shall we?</p>
+<p>The results show that on one day in a thousand days, momentum drops by at least -9.65%, while low volatility drops by at least -4.45% for low volatility. This is a crucial distinction, VaR only states the minimum possible worst case loss, since it is a quantile, i.e. only the first value in the 99% of losses is given. ES on the otherhand, solves for this by giving the expected loss given that the VaR loss quantile has been exceeded.</p>
+<p>The ES for momentum is -16.62%, while low volatility’s ES is -08.07%. So should 31 July, 2020 be like the worst possible month in the last 100 days, one can expect to lose 16.62% on momentum . Likewise, low volatility can be expected to lose 8.07% if 31 July, 2020 exceeds the VaR quantile. The expected shortfall of momentum is less than 1% greater but the expected shortfall on low volatility is greater than low volatility by more than 2%. This shows that expected shortfall considers the size of the tails, unlike VaR.</p>
 </div>
-<div id="significance-of-returns" class="section level2">
-<h2>Significance of returns</h2>
-<p>Easiest way to do this is to test if the difference in the means is statistically different from zero.</p>
-<pre class="r"><code>t.test(portfolio_returns,jse,alternative=&quot;two.sided&quot;,
-       conf.level=0.95)</code></pre>
-<pre><code>
-    Welch Two Sample t-test
+<div id="historical-simulation-of-portfolio-var-and-es" class="section level1">
+<h1>Historical Simulation of Portfolio VaR and ES</h1>
+<p>The steps are the same as before, with the caveat that with a portfolio of strategies, a single value is need for portfolio mean and standard deviation each. These will then be used as parameters in the VaR calculation.</p>
+<p>I assume that I combine my strategies into one portfolio, with a 70% weighting towards the momentum strategy.</p>
+<pre class="r"><code>rp &lt;- Return.portfolio(strategies, weights = c(.7, .3)) #%&gt;% tk_tbl() %&gt;% rename(Date = index)
 
-data:  portfolio_returns and jse
-t = -0.30192, df = 471.76, p-value = 0.7628
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.010965617  0.008044704
-sample estimates:
-  mean of x   mean of y 
-0.007469999 0.008930456 </code></pre>
-<p>The p-value is greater than 0.1, therefore the difference in the means is not statistically different from zero. Still, this means that our portfolio does not provide returns greater than the market.</p>
+source(&quot;helpers/hc_themes.R&quot;)
+
+highchart(type = &quot;stock&quot;) %&gt;% 
+  hc_add_series(rp[,1], name = &quot;Portfolio&quot;) %&gt;% 
+  hc_add_theme(font_theme) %&gt;% 
+  hc_colors(&quot;#f03a61&quot;) %&gt;% 
+  hc_title(text = &quot;Portfolio Daily Returns&quot;) %&gt;% 
+  hc_navigator(enabled = FALSE) %&gt;%
+  hc_scrollbar(enabled = FALSE) %&gt;%
+  hc_exporting(enabled = TRUE, scale = 4)</code></pre>
+<div id="htmlwidget-58c44b8fcdc125f747dd" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-58c44b8fcdc125f747dd">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Portfolio Daily Returns"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true,"scale":4},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[980899200000,0.0327282291241358],[983318400000,0.0104576645261498],[985910400000,-0.0815716846718975],[988588800000,0.096582462990253],[991267200000,0.0572693702709823],[993772800000,-0.016111432406935],[996537600000,-0.0522208361791062],[999216000000,0.0437366548259877],[1001635200000,-0.0396232364551288],[1004486400000,0.0416931773392721],[1007078400000,0.0525154980081797],[1009756800000,0.0880820564493561],[1012435200000,0.0128368005016937],[1014854400000,0.121794380841085],[1017273600000,0.0499277937746747],[1020124800000,0.0235665084339596],[1022803200000,0.00619956302344593],[1025222400000,-0.0270947560492343],[1028073600000,-0.106254592088946],[1030665600000,0.049637889860553],[1033344000000,0.0361604498208572],[1036022400000,-0.00909030986152859],[1038528000000,0.0247798048447223],[1041292800000,0.0528698733826218],[1043971200000,0.0107846690992228],[1046390400000,-0.0438807628872506],[1049068800000,-0.0766950885203037],[1051660800000,-0.0215724710533765],[1054252800000,0.133270065072602],[1056931200000,0.0203737261104739],[1059609600000,0.0537110346538787],[1062115200000,0.0322303234449608],[1064880000000,-0.00605116409046813],[1067558400000,0.0865383853068575],[1069977600000,0.0772285716203773],[1072828800000,0.0410251444192458],[1075420800000,-0.0211322545068109],[1077840000000,0.00668637202257027],[1080691200000,0.0316602533109869],[1083283200000,0.00146421697137922],[1085961600000,-0.00868405366949987],[1088553600000,0.00770403876772985],[1091145600000,0.00668153130926608],[1093910400000,0.055010256948969],[1096502400000,0.0853035038136767],[1099008000000,0.0804517121400312],[1101772800000,0.16111144575955],[1104451200000,0.0315077498539023],[1107129600000,-0.0216531139193396],[1109548800000,0.0339290366827891],[1112227200000,-0.0365687145957505],[1114732800000,-0.0164814811499842],[1117497600000,0.0535815076803494],[1120089600000,0.0153577032053764],[1122595200000,0.0744965200078471],[1125446400000,0.0369144214642556],[1128038400000,0.096051542100541],[1130716800000,0.00441524088802447],[1133308800000,0.0359061901690161],[1135900800000,0.0710756104412926],[1138665600000,0.109148655879728],[1141084800000,-0.0305845395273706],[1143763200000,0.0853289260885557],[1146182400000,0.0181991156868782],[1149033600000,0.0117320883113574],[1151625600000,0.0520491136239258],[1154304000000,-0.0139056170736961],[1156982400000,0.0492183119247414],[1159488000000,0.0196697335560667],[1162252800000,0.0587223109172714],[1164844800000,0.0471464324710609],[1167350400000,0.0451707653130464],[1170201600000,0.0312849706990279],[1172620800000,0.045183889843581],[1175212800000,0.0528207554233071],[1177891200000,0.059925430151349],[1180569600000,0.0308540684988221],[1183075200000,-0.0313195761919249],[1185840000000,0.0169373994234601],[1188518400000,-0.00650518461107752],[1190937600000,0.0832525732661924],[1193788800000,0.0596879391036658],[1196380800000,-0.0476560494069813],[1199059200000,0.00184631885747333],[1201737600000,-0.0718477959607137],[1204243200000,0.123856273728054],[1206921600000,-0.0356580477910082],[1209513600000,0.0489805405124843],[1212105600000,0.0594606138936555],[1214784000000,-0.0768307314620181],[1217462400000,-0.0252611114518586],[1219968000000,-0.0297190212133828],[1222732800000,-0.159138332032714],[1225411200000,-0.191161357332489],[1227830400000,-0.0280667841731],[1230681600000,0.0431598830613178],[1233273600000,-0.0379201963886104],[1235692800000,-0.0766517909474249],[1238457600000,0.0211739039543661],[1241049600000,0.0125254100781058],[1243555200000,0.0700056380494556],[1246320000000,-0.0037330594393481],[1248998400000,0.0790297747285409],[1251676800000,0.0549430813445537],[1254268800000,0.008035954876912],[1256860800000,0.0308635091691489],[1259539200000,0.00126105671747023],[1262217600000,0.0606711477604007],[1264723200000,-0.00289581748337309],[1267142400000,0.0282481998201394],[1269993600000,0.0584468316244151],[1272585600000,0.0204723598971444],[1275264000000,-0.0552425201842526],[1277856000000,-0.00650079655845637],[1280448000000,0.0519616235519325],[1283212800000,-0.00503562329916629],[1285804800000,0.0856324075171067],[1288310400000,0.0235508491622063],[1291075200000,0.0076191275518831],[1293753600000,0.0281962605028339],[1296432000000,-0.0488725118334294],[1298851200000,0.0122197332810594],[1301529600000,-0.0373012870379259],[1304035200000,0.0274837441685487],[1306800000000,0.00185967905585827],[1309392000000,-0.0186797813817764],[1311897600000,0.0151135115979488],[1314748800000,0.0153976969931877],[1317340800000,-0.0120702758242072],[1320019200000,0.0503864246635695],[1322611200000,0.019471511334934],[1325203200000,-0.0149139423937485],[1327968000000,0.0355556286807956],[1330473600000,0.029576963837908],[1333065600000,0.0146934130612499],[1335744000000,0.00754023113661484],[1338422400000,-0.00989853993756129],[1340928000000,0.0252381368934116],[1343692800000,0.0587664065659936],[1346371200000,0.0270765582668382],[1348790400000,0.000980887221105231],[1351641600000,0.0323846272170178],[1354233600000,0.0195027226014628],[1356912000000,0.0431548543367493],[1359590400000,-0.0131407159455225],[1362009600000,0.00812057993338589],[1364428800000,0.0272898546436489],[1367280000000,-0.0128800476584537],[1369958400000,0.0664429939240387],[1372377600000,-0.0304386919943378],[1375228800000,0.0463201537711659],[1377820800000,0.0153788926040739],[1380499200000,0.0434221226870704],[1383177600000,0.0444384377724643],[1385683200000,0.00859116710704155],[1388448000000,0.0161926991186234],[1391126400000,-0.0111195632382127],[1393545600000,0.0678432660332391],[1396224000000,0.0260085680271098],[1398816000000,0.0341556307036384],[1401408000000,0.0251407548545224],[1404086400000,0.03706006567359],[1406764800000,0.0212024811010341],[1409270400000,0.0247822331215528],[1412035200000,-0.0293461975560652],[1414713600000,0.0328463018475109],[1417132800000,0.0348723520805096],[1419984000000,0.002218481014435],[1422576000000,0.055621965126855],[1424995200000,0.04852262188317],[1427760000000,0.0400409342426693],[1430352000000,0.0234555763968451],[1432857600000,-0.0534540076212519],[1435622400000,-0.0143878665841263],[1438300800000,0.0271103063997005],[1440979200000,-0.0234726596652384],[1443571200000,-0.0198379749271],[1446163200000,0.077853939310994],[1448841600000,0.00048860681580476],[1451520000000,-0.0500216525892738],[1454025600000,-0.0767481063621147],[1456704000000,0.0648103044751802],[1459382400000,0.0371409455376888],[1461888000000,-0.00214947373229601],[1464652800000,0.0128490120647784],[1467244800000,-0.00695603718593119],[1469750400000,0.035995310417464],[1472601600000,-0.056820477397046],[1475193600000,0.0157039450194889],[1477872000000,-0.0185467739433304],[1480464000000,-0.00700597898281452],[1483056000000,-0.0249595391831939],[1485820800000,0.127846110684258],[1488240000000,-0.0161792330103937],[1490918400000,-0.00530172074702329],[1493337600000,-0.016768077514808],[1496188800000,-0.0364782565975706],[1498780800000,-0.0239104918819232],[1501459200000,0.0525258931387091],[1504137600000,0.00701112992282349],[1506643200000,-0.00153312109454529],[1509408000000,0.0296633508839543],[1512000000000,0.0161308401397908],[1514505600000,0.0144895890307606],[1517356800000,-0.0322325029157479],[1519776000000,0.0284867957551669],[1522281600000,-0.0603120404505064],[1525046400000,0.0137318804904223],[1527724800000,-0.0873054578600642],[1530230400000,-0.0280564245343968],[1532995200000,0.0382253975810436],[1535673600000,0.0154458217276701],[1538092800000,-0.0285631750215555],[1540944000000,-0.0117196070890495],[1543536000000,-0.0589270647843008],[1546214400000,0.0102985160404345],[1548892800000,0.0106961316729433],[1551312000000,0.0881804524854048],[1553817600000,-0.00200169209931333],[1556582400000,0.00881409956828749],[1559260800000,-0.000865279891809734],[1561680000000,0.0617335372384273],[1564531200000,-0.00259433600514047],[1567123200000,0.0482510770926508],[1569801600000,-0.0434650320822028],[1572480000000,0.0875182940925525],[1574985600000,-0.0447665953959796],[1577750400000,0.0589730798933015],[1580428800000,-0.0211638950825861],[1582848000000,-0.0835653412879064],[1585612800000,-0.158212711415814],[1588204800000,0.217231779901057],[1590710400000,0.0109089296456886],[1593475200000,0.0405746735655597],[1596153600000,0.114303468681423]],"name":"Portfolio"}],"colors":["#f03a61"],"navigator":{"enabled":false},"scrollbar":{"enabled":false}},"theme":{"colors":["#89736C","#43423e","#2e6e9e","#FF0000","#BEDDDE"],"chart":{"backgroundColor":"#FFF1E0","style":{"fontFamily":"Montserrat","color":"#777"}},"title":{"align":"left","style":{"fontFamily":"Droid Serif","color":"black","fontWeight":"bold"}},"subtitle":{"align":"left","style":{"fontFamily":"Droid Serif","fontWeight":"bold"}},"yAxis":{"gridLineDashStyle":"Dot","gridLineColor":"#CEC6B9","lineColor":"#CEC6B9","minorGridLineColor":"#CEC6B9","labels":{"align":"left","x":0,"y":-2},"tickLength":0,"tickColor":"#CEC6B9","tickWidth":1,"title":{"style":{"color":"#74736c"}}},"tooltip":{"backgroundColor":"#FFFFFF","borderColor":"#76c0c1","style":{"color":"#000000"}},"legend":{"itemStyle":{"color":"#3C3C3C"},"itemHiddenStyle":{"color":"#606063"}},"credits":{"style":{"color":"#666"}},"labels":{"style":{"color":"#D7D7D8"}},"drilldown":{"activeAxisLabelStyle":{"color":"#F0F0F3"},"activeDataLabelStyle":{"color":"#F0F0F3"}},"navigation":{"buttonOptions":{"symbolStroke":"#DDDDDD","theme":{"fill":"#505053"}}},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":["Montserrat","Droid+Serif"],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>Obtaining portfolio means is simple; multiply the returns by the weights, then sum and divide by number of observations. Or even simpler:</p>
+<p><span class="math display">\[\mu_p = \mu_1w_1 + \mu_2w_2\]</span></p>
+<p>which gives a mean portfolio return of 0.001238.</p>
+<p>The above method does not work for standard deviation as it does not take into account the covariance between the two strategies. To get portfolio variance, multiply the weights vector by the variance covariance matrix:</p>
+<p><span class="math display">\[\begin{equation*}
+\begin{pmatrix}
+w_{1}\\
+w_{2}
+\end{pmatrix}.
+\begin{pmatrix}
+\sigma_{1}^2 &amp; \sigma_{1,2} \\
+\sigma_{2,1} &amp; \sigma_{2}^2
+\end{pmatrix}.
+\begin{pmatrix}
+w_{1} &amp; w_{2}
+\end{pmatrix}
+\end{equation*}\]</span></p>
+<p>The portfolio standard deviation is then the squareroot of the variance.</p>
+<p>In R, this is implemented simply by:</p>
+<pre class="r"><code>t(c(0.7, 0.3)) %*% cov(strategies) %*% c(0.7, 0.3) %&gt;% sqrt()</code></pre>
+<p>The result of which is a standard deviation of 4.343%</p>
+<p>Now with a mean and standard deviation, the portfolio VaR can be calculated as a single asset VaR. The functions below are extended versions of the previous function, extended to include a portfolio calculation.</p>
+<pre class="r"><code>mVaR &lt;- function(x, p=0.95, mu = TRUE, type = &quot;portfolio&quot;, weights = NULL) {
+  
+  if (type!=&quot;single&quot;) rVaR(x, p)
+  
+  if(type==&quot;portfolio&quot; &amp; is.null(weights)) {
+    weights = colSums(is.na(as.data.frame(t(as.numeric(colnames(x)))))) / ncol(x)
+    # equal weighting if no weights passed
+  } 
+  
+  port.sig &lt;- t(weights) %*% cov(x) %*% weights %&gt;% sqrt()
+  
+  if (mu) {
+    
+    port.mean &lt;- sum(weights * colMeans(x, na.rm = T))
+    
+    port.mean + qnorm(1-p, mean = port.mean, sd = port.sig)
+  
+  } else {
+    
+    p.var &lt;- qnorm(1-p, mean = 0, sd = port.sig)
+
+    }
+
+}
+
+mES &lt;- function(x, p=0.95, mu = TRUE, type = &quot;portfolio&quot;, weights = NULL) {
+  
+  if (type == &quot;single&quot;) rES(x, p)
+  
+  if(type==&quot;portfolio&quot; &amp; is.null(weights)) {
+    weights = colSums(is.na(as.data.frame(t(as.numeric(colnames(x)))))) / ncol(x)
+  } 
+  
+  port.sig &lt;- t(weights) %*% cov(x) %*% weights %&gt;% sqrt()
+  
+  if (mu) {
+    
+    port.mean &lt;- sum(weights * colMeans(x, na.rm = T))
+    
+    -(port.mean + port.sig * exp(-qnorm(1-p)^2/2)/(sqrt(2*pi)*(1-p)))
+    
+  } else {
+    
+    -(port.sig * exp(-qnorm(1-p)^2/2)/(sqrt(2*pi)*(1-p)))
+    
+  }
+  
+}</code></pre>
+<p>The results of portfolio VaR and ES are:</p>
+<pre class="r"><code>var.es &lt;-cbind(mVaR(strategies, p = 0.99, #method = &quot;historical&quot;, portfolio_method = &quot;component&quot;,
+                    weights = c(0.7,0.3))[[1]],
+               mES(strategies, p = 0.99, #method = &quot;historical&quot;, portfolio_method = &quot;component&quot;,
+                    weights = c(0.7, 0.3))[[1]]
+               ) %&gt;% as.data.frame()
+
+var.es &lt;- cbind(Date = dmy(&quot;01-10-2020&quot;), var.es)
+colnames(var.es)[-1] &lt;- c(&quot;h VaR 99%&quot;, &quot;ES 99%&quot;)
+
+var.es</code></pre>
+<table class = 'rTable'>
+VaR </strong>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:right;">
+h VaR 99%
+</th>
+<th style="text-align:right;">
+ES 99%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2020-10-01
+</td>
+<td style="text-align:right;">
+-0.0720086
+</td>
+<td style="text-align:right;">
+-0.1302825
+</td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>This is with momentum as asset 1 (70% weighting) and low volatility as asset 2 (30% weighting). Assuming a portfolio value of R1,000,000, the VaR results show that in one month in 100 months, the portfolio will lose 7.2% (R72,000). The ES shortfall shows that given that the return exceeds the 1% level, the expected loss will be -13.02% of the portfolio, which is -R130,200.</p>
+</div>
+<div id="portfolio-var-forecast" class="section level1">
+<h1>Portfolio VaR forecast</h1>
+<p>The forecast uses the same VaR and ES formulas from before. In addition, conceptually the process as the historical simulation. The difference here is that the forecast is done daily from the day after the 100<sup>th</sup> day. The historical simulation uses 100 days of prior data.</p>
+<p>This difference means a slightly different approach with the R code. In question 3, the mean and standard deviation was calculated within the functions. This calculation was designed for single portfolio as it does not factor in weights or covariances.</p>
+<p>By themselves, the mVaR and mES functions only calculate the VaR and ES on one day. To get the VaR on each day, the function needs to be rolled over the data, using a window of 100 days.</p>
+<pre class="r"><code>port.var &lt;- rollapply(strategies, FUN = mVaR, 
+                 p = 0.99, weights = c(.7, .3),
+                 width = 100, by.column = FALSE)
+
+port.es &lt;- rollapply(strategies, FUN = mES, 
+                 p = 0.99, weights = c(.7, .3),
+                 width = 100, by.column = FALSE)</code></pre>
+<p>The table below shows the results of the first three days (after the first 100) and the most recent 3 days.</p>
+<pre class="r"><code>port.res &lt;- data.frame(Date = index(strategies), VaR = port.var, ES = port.es)
+port.res.tab &lt;- kableExtra::kable(port.res[c(101:102, 125:126, 200:201),], row.names = FALSE)
+port.res.tab &lt;- gsub(&quot;&lt;table&gt;&quot;, &quot;&lt;table id = &#39;varPortTable&#39;&quot;, port.res.tab)
+port.res.tab</code></pre>
+<table id = 'varPortTable'
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Date </th>
+   <th style="text-align:right;"> VaR </th>
+   <th style="text-align:right;"> ES </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2009-05-29 </td>
+   <td style="text-align:right;"> -0.0817947 </td>
+   <td style="text-align:right;"> -0.1537983 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2009-06-30 </td>
+   <td style="text-align:right;"> -0.0821882 </td>
+   <td style="text-align:right;"> -0.1537698 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2011-05-31 </td>
+   <td style="text-align:right;"> -0.0738897 </td>
+   <td style="text-align:right;"> -0.1449921 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2011-06-30 </td>
+   <td style="text-align:right;"> -0.0728217 </td>
+   <td style="text-align:right;"> -0.1446096 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-08-31 </td>
+   <td style="text-align:right;"> -0.0421329 </td>
+   <td style="text-align:right;"> -0.0951672 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-29 </td>
+   <td style="text-align:right;"> -0.0425565 </td>
+   <td style="text-align:right;"> -0.0936474 </td>
+  </tr>
+</tbody>
+</table>
+<p>The full results are plotted in the figures below:</p>
+<pre class="r"><code>var.es.forecast &lt;- data.frame(Date = index(port.var), VaR = port.var, ES = port.es) %&gt;% na.omit() %&gt;% tk_xts()
+
+highchart(type = &quot;stock&quot;) %&gt;% 
+  hc_add_series(var.es.forecast[,1], name = &quot;VaR&quot;) %&gt;% 
+  hc_add_series(var.es.forecast[,2], name = &quot;ES&quot;) %&gt;% 
+  hc_add_theme(font_theme) %&gt;% 
+  hc_colors(c(&quot;#f03a61&quot;, &quot;#5f071a&quot;)) %&gt;% 
+  hc_title(text = &quot;Portfolio VaR and ES&quot;) %&gt;% 
+  hc_navigator(enabled = FALSE) %&gt;%
+  hc_scrollbar(enabled = FALSE) %&gt;%
+  hc_exporting(enabled = TRUE, scale = 4) </code></pre>
+<div id="htmlwidget-6c416c84abc65f794eda" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6c416c84abc65f794eda">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Portfolio VaR and ES"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true,"scale":4},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[1241049600000,-0.0819839729979901],[1243555200000,-0.0817946852783092],[1246320000000,-0.0821881679533953],[1248998400000,-0.0775096536298244],[1251676800000,-0.0772667829185835],[1254268800000,-0.077885510110959],[1256860800000,-0.0766925042188843],[1259539200000,-0.0745402271091827],[1262217600000,-0.0744608672316995],[1264723200000,-0.0728958413126134],[1267142400000,-0.0729805125424849],[1269993600000,-0.0729540501531515],[1272585600000,-0.0732711567947874],[1275264000000,-0.0754010844736634],[1277856000000,-0.075914348146716],[1280448000000,-0.0758705368905192],[1283212800000,-0.0764625643006566],[1285804800000,-0.0758437881535234],[1288310400000,-0.0743512990053169],[1291075200000,-0.0694326641004594],[1293753600000,-0.0696747681882123],[1296432000000,-0.072118906079568],[1298851200000,-0.0718286204798848],[1301529600000,-0.0734817859546912],[1304035200000,-0.0736843616396694],[1306800000000,-0.0738896518286136],[1309392000000,-0.0728216574879426],[1311897600000,-0.0691935364161692],[1314748800000,-0.0683301549036161],[1317340800000,-0.068382422313099],[1320019200000,-0.0681291979249867],[1322611200000,-0.0686576746353773],[1325203200000,-0.0695246887427333],[1327968000000,-0.0686989157737303],[1330473600000,-0.0686913197573687],[1333065600000,-0.0690373955723332],[1335744000000,-0.0694789229717676],[1338422400000,-0.0692042817787225],[1340928000000,-0.0688212988253502],[1343692800000,-0.0686208016764256],[1346371200000,-0.0680994895603968],[1348790400000,-0.0677984517138827],[1351641600000,-0.0673512025706243],[1354233600000,-0.0670181993822655],[1356912000000,-0.0670857162136031],[1359590400000,-0.0680233149652658],[1362009600000,-0.0684214585034387],[1364428800000,-0.0663402234413195],[1367280000000,-0.0673079134823959],[1369958400000,-0.0659753068792491],[1372377600000,-0.0675912151011828],[1375228800000,-0.0656806311443375],[1377820800000,-0.0648226384885007],[1380499200000,-0.0648427536620877],[1383177600000,-0.0644471037711423],[1385683200000,-0.0650063025498123],[1388448000000,-0.0652919736684906],[1391126400000,-0.0660269356124232],[1393545600000,-0.0654211069427754],[1396224000000,-0.0656138859143418],[1398816000000,-0.0655907216110991],[1401408000000,-0.0649863385101131],[1404086400000,-0.0635863232434224],[1406764800000,-0.0636143241254598],[1409270400000,-0.0635791697940451],[1412035200000,-0.0645115384060643],[1414713600000,-0.0645621681483227],[1417132800000,-0.063850123390139],[1419984000000,-0.0644199368332526],[1422576000000,-0.0643381588547287],[1424995200000,-0.064353311994782],[1427760000000,-0.0644720247587916],[1430352000000,-0.0647338448523206],[1432857600000,-0.0671623083396873],[1435622400000,-0.0680214834584169],[1438300800000,-0.0681111389309815],[1440979200000,-0.069194412879806],[1443571200000,-0.0700215925952734],[1446163200000,-0.0686579500463731],[1448841600000,-0.0689907180564959],[1451520000000,-0.0706298526710416],[1454025600000,-0.0740255495051652],[1456704000000,-0.0740446017629687],[1459382400000,-0.0719760937923377],[1461888000000,-0.0720730140452875],[1464652800000,-0.0675911619556887],[1467244800000,-0.0668479490155223],[1469750400000,-0.0646822245536494],[1472601600000,-0.06700837451297],[1475193600000,-0.0672380853868444],[1477872000000,-0.0639465529788728],[1480464000000,-0.0636828077348266],[1483056000000,-0.0634568955276004],[1485820800000,-0.0559263034806032],[1488240000000,-0.0447043361596623],[1490918400000,-0.0443342766803042],[1493337600000,-0.045484543419918],[1496188800000,-0.0453636900738852],[1498780800000,-0.042139415295095],[1501459200000,-0.0419565398271973],[1504137600000,-0.0421329164114279],[1506643200000,-0.0425564527152639],[1509408000000,-0.04190628633949],[1512000000000,-0.0416353878954856],[1514505600000,-0.0417275607639697],[1517356800000,-0.0429269718751396],[1519776000000,-0.0429771264968388],[1522281600000,-0.0453277794149633],[1525046400000,-0.0453749946383494],[1527724800000,-0.0498247368586012],[1530230400000,-0.0513836010065442],[1532995200000,-0.0513054218028586],[1535673600000,-0.0515382751263741],[1538092800000,-0.0506429725158015],[1540944000000,-0.0508998349678409],[1543536000000,-0.0534008454215005],[1546214400000,-0.0532220054310693],[1548892800000,-0.0528132292700896],[1551312000000,-0.0532355090031627],[1553817600000,-0.0535445082760586],[1556582400000,-0.0537428997908981],[1559260800000,-0.0520745414312495],[1561680000000,-0.0518450866526866],[1564531200000,-0.0508113222958268],[1567123200000,-0.0507738753991784],[1569801600000,-0.0520931345778129],[1572480000000,-0.0516923568665029],[1574985600000,-0.0534848350431957],[1577750400000,-0.0533133336733954],[1580428800000,-0.0535157490565547],[1582848000000,-0.0572488921901465],[1585612800000,-0.0659357612483133],[1588204800000,-0.0708430752908102],[1590710400000,-0.0711096368049001],[1593475200000,-0.0711006428252755],[1596153600000,-0.0714754349909317]],"name":"VaR"},{"data":[[1241049600000,-0.15307912912087],[1243555200000,-0.153798275693415],[1246320000000,-0.153769833439673],[1248998400000,-0.153515931804177],[1251676800000,-0.151678629733927],[1254268800000,-0.15084400511506],[1256860800000,-0.151029153760656],[1259539200000,-0.15025169463622],[1262217600000,-0.150566421268679],[1264723200000,-0.150025868048781],[1267142400000,-0.149913085633515],[1269993600000,-0.150035880213982],[1272585600000,-0.14839546386905],[1275264000000,-0.148991902297463],[1277856000000,-0.146028002306277],[1280448000000,-0.146256539882529],[1283212800000,-0.146116945960973],[1285804800000,-0.147624201923571],[1288310400000,-0.147564903595202],[1291075200000,-0.145225199310283],[1293753600000,-0.144842952664945],[1296432000000,-0.145203850869433],[1298851200000,-0.145204128028815],[1301529600000,-0.145308032013111],[1304035200000,-0.14501317034894],[1306800000000,-0.144992050353154],[1309392000000,-0.144609590939808],[1311897600000,-0.143184379638805],[1314748800000,-0.143139818989557],[1317340800000,-0.138718270387701],[1320019200000,-0.13913576935053],[1322611200000,-0.138395143842677],[1325203200000,-0.138070189641744],[1327968000000,-0.138463589177432],[1330473600000,-0.136727465416468],[1333065600000,-0.135170187096777],[1335744000000,-0.134800257786927],[1338422400000,-0.13473428886409],[1340928000000,-0.134931560519994],[1343692800000,-0.13564643518577],[1346371200000,-0.135883476144136],[1348790400000,-0.135864573001085],[1351641600000,-0.136092175120483],[1354233600000,-0.136219971276693],[1356912000000,-0.135912211270931],[1359590400000,-0.13427832826942],[1362009600000,-0.132692639989816],[1364428800000,-0.126325111300995],[1367280000000,-0.126074250463762],[1369958400000,-0.12702675514181],[1372377600000,-0.126918124127315],[1375228800000,-0.127041060018337],[1377820800000,-0.127025654212201],[1380499200000,-0.12678623108864],[1383177600000,-0.127303649568775],[1385683200000,-0.125719489345578],[1388448000000,-0.125417255984478],[1391126400000,-0.123301080687573],[1393545600000,-0.124416968151182],[1396224000000,-0.124160721243719],[1398816000000,-0.122859372931852],[1401408000000,-0.119841661155352],[1404086400000,-0.120058012941158],[1406764800000,-0.118258723729965],[1409270400000,-0.118301111211532],[1412035200000,-0.118414418371643],[1414713600000,-0.118167475997288],[1417132800000,-0.118489233894853],[1419984000000,-0.117850906362463],[1422576000000,-0.118816959707584],[1424995200000,-0.118410498562066],[1427760000000,-0.117797112094195],[1430352000000,-0.11715829948253],[1432857600000,-0.117494112428375],[1435622400000,-0.116975856510007],[1438300800000,-0.116679675215799],[1440979200000,-0.115429094288403],[1443571200000,-0.115214349874201],[1446163200000,-0.11670008872376],[1448841600000,-0.116656424232648],[1451520000000,-0.117252180154311],[1454025600000,-0.116665551014527],[1456704000000,-0.116811503574475],[1459382400000,-0.116999759994621],[1461888000000,-0.116991624904764],[1464652800000,-0.114836887871243],[1467244800000,-0.110192769318539],[1469750400000,-0.110167860132774],[1472601600000,-0.110154380366836],[1475193600000,-0.109194258922243],[1477872000000,-0.107372579895791],[1480464000000,-0.107335071545644],[1483056000000,-0.107263413414702],[1485820800000,-0.105997903186774],[1488240000000,-0.0974935511105816],[1490918400000,-0.0974155062398644],[1493337600000,-0.0965941729340446],[1496188800000,-0.0965275404058226],[1498780800000,-0.0944739316271513],[1501459200000,-0.0952130694857591],[1504137600000,-0.0951672444755626],[1506643200000,-0.093647425350818],[1509408000000,-0.093825780265875],[1512000000000,-0.0915378749537662],[1514505600000,-0.0906592880384925],[1517356800000,-0.0909317109753777],[1519776000000,-0.0907732361375685],[1522281600000,-0.0919003353864895],[1525046400000,-0.0907347011076245],[1527724800000,-0.0934311442942209],[1530230400000,-0.0933013871770962],[1532995200000,-0.092516902074383],[1535673600000,-0.0923476348208164],[1538092800000,-0.0918396607212025],[1540944000000,-0.0918844530312286],[1543536000000,-0.091481674405434],[1546214400000,-0.0915011477543552],[1548892800000,-0.0890367000935912],[1551312000000,-0.091035022351571],[1553817600000,-0.0909628666312531],[1556582400000,-0.0906887659808401],[1559260800000,-0.0899473787583601],[1561680000000,-0.091131102056264],[1564531200000,-0.0907918415109274],[1567123200000,-0.0909777063461248],[1569801600000,-0.0913824762699073],[1572480000000,-0.0937532867640378],[1574985600000,-0.0941804470667349],[1577750400000,-0.0950233399597071],[1580428800000,-0.0950781538859893],[1582848000000,-0.0957567984991345],[1585612800000,-0.101286020720577],[1588204800000,-0.112749874872346],[1590710400000,-0.112221041383011],[1593475200000,-0.112253379543936],[1596153600000,-0.115109720780052]],"name":"ES"}],"colors":["#f03a61","#5f071a"],"navigator":{"enabled":false},"scrollbar":{"enabled":false}},"theme":{"colors":["#89736C","#43423e","#2e6e9e","#FF0000","#BEDDDE"],"chart":{"backgroundColor":"#FFF1E0","style":{"fontFamily":"Montserrat","color":"#777"}},"title":{"align":"left","style":{"fontFamily":"Droid Serif","color":"black","fontWeight":"bold"}},"subtitle":{"align":"left","style":{"fontFamily":"Droid Serif","fontWeight":"bold"}},"yAxis":{"gridLineDashStyle":"Dot","gridLineColor":"#CEC6B9","lineColor":"#CEC6B9","minorGridLineColor":"#CEC6B9","labels":{"align":"left","x":0,"y":-2},"tickLength":0,"tickColor":"#CEC6B9","tickWidth":1,"title":{"style":{"color":"#74736c"}}},"tooltip":{"backgroundColor":"#FFFFFF","borderColor":"#76c0c1","style":{"color":"#000000"}},"legend":{"itemStyle":{"color":"#3C3C3C"},"itemHiddenStyle":{"color":"#606063"}},"credits":{"style":{"color":"#666"}},"labels":{"style":{"color":"#D7D7D8"}},"drilldown":{"activeAxisLabelStyle":{"color":"#F0F0F3"},"activeDataLabelStyle":{"color":"#F0F0F3"}},"navigation":{"buttonOptions":{"symbolStroke":"#DDDDDD","theme":{"fill":"#505053"}}},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":["Montserrat","Droid+Serif"],"debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
 
 
@@ -496,7 +752,7 @@ sample estimates:
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

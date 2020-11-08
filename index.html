@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Tatenda Christian Rusere" />
+<meta name="author" content="Mwangele Kaluba" />
 
-<meta name="date" content="2020-11-04" />
+<meta name="date" content="2020-11-08" />
 
 <title>Financial Analysis in R</title>
 
@@ -24,6 +24,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -34,7 +36,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -361,21 +363,15 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Financial Analysis in R</h1>
-<h4 class="author">Tatenda Christian Rusere</h4>
-<h4 class="date">04 Nov 2020</h4>
+<h4 class="author">Mwangele Kaluba</h4>
+<h4 class="date">08 Nov 2020</h4>
 
 </div>
 
 
-<div id="purpose-of-the-document" class="section level1">
-<h1>Purpose of the document</h1>
-<p>This document has two practical motivations and one philosophic motivation. The two practical motivations are: (1) to introduce R to finance honours students who wish to move beyond Excel for their quantitative work and (2) to show finance honours students a guideline to what their R project should be structured like.</p>
-<p>The driving force behind this book is clean, neat, readable, reusable and reproducible R code for finance. We will prioritize code that is understandable over code that is theoretically brilliant.</p>
-</div>
-<div id="structure-of-the-document" class="section level1">
-<h1>Structure of the document</h1>
-<p>This book is organized into 4 sections: Installing R, Importing Data into R, Calculating and graphing returns, and empirical tests.</p>
-<p>More generally, this book is structured around building a portfolio and then analyzing that portfolio, or what I think of as telling the story of that portfolio with data. We will use that portfolio as the vehicle for exploring R and that is quite purposeful. I often hear the question asked, “I want to learn R, what steps should I take?”. And if that question is posed to me, I like to ask, “What problem are you trying to solve?”. The best way to start learning R or deepen your knowledge of R is to have a specific project or problem that you need to solve. Thus, the book is structured as the project of analysing our custom portfolio.</p>
+<div id="purpose-of-this-website" class="section level1">
+<h1>Purpose of this website</h1>
+<p>The motivation behind this website is twofold. The two practical motivations are: (1) to showcase the power of R over Excel for financial quantitative analysis, (2) to showcase the analytical skills of the author to prospective employers/clients.</p>
 </div>
 
 
@@ -387,7 +383,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

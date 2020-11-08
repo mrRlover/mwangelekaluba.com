@@ -22,6 +22,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -32,7 +34,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -363,10 +365,11 @@ $(document).ready(function () {
 </div>
 
 
-<p>The primary purpose of this project has been to give a rough guideline as to what a research project should look like. This does not mean that everything in this document will apply to your research project. Depending on what your topic is, you might use all the code in this document or virtually none! Most wil likely be in the middle as this document covers most of the core packages, data imports and return calculations that you’ll likely be doing in your research.</p>
-<p>Should you need assistance beyond what is contained in this document, feel free to contact me on:</p>
+<p>The primary purpose of this project has been to showcase some financial analysis using the R programming language. What has been shown so far does not even begin to scratch the surface of R’s potential analytical capabilities.</p>
 <strong>Note</strong> <p>
   This web application is developed with
+  <a href="https://www.r-project.org/">R</a>
+  and
   <a href="http://www.rstudio.com/" target="_blank">R Studio</a>
   
 </p> <br/> <strong>List of packages used:</strong> <br/> <p class="libs">
@@ -388,8 +391,6 @@ $(document).ready(function () {
   <br/>
   <code>library(tidyquant)</code>
   <br/>
-  <code>library(beeswarm)</code>
-  <br/>
   <code>library(tidyverse)</code>
   <br/>
   <code>library(timetk)</code>
@@ -401,16 +402,10 @@ $(document).ready(function () {
   <br/>
   <a href="https://datascienceplus.com/identify-describe-plot-and-removing-the-outliers-from-the-dataset/" target="_blank">Data Management: Identify, describe, plot, and remove the outliers from the dataset.</a>
   <br/>
-  <a href="https://github.com/saurfang/shinyCorrplot" target="_blank">Saurfang at GitHub implementation of corrplot</a>
-  <br/>
-  <a href="http://langtest.jp/shiny/cor/" target="_blank">Atsushi Mizumoto, Ph.D. correlation webapp with shiny</a>
-  <br/>
-  <a href="https://shiny.rstudio.com/" target="_blank">All instructions and fora on Shiny</a>
-  <br/>
   <a href="https://stackoverflow.com/" target="_blank">All fora and smart guys on Stackoverflow</a>
 </p> <br/> <p>
   The code for this web application is available at
-  <a href="https://github.com/mrRlover/sample/" target="_blank">GitHub.</a>
+  <a href="https://github.com/mrRlover/mwangelekaluba.com/" target="_blank">GitHub.</a>
 </p> <br/> <strong>Recommended</strong> <p>
   To learn more about R, I suggest this book (free pdf),
   <a href="http://www.ievbras.ru/ecostat/Kiril/R/Biblio/R_eng/R%20dummies.pdf" target="_blank">R for Dummies,</a>
@@ -420,7 +415,7 @@ $(document).ready(function () {
   <a href="http://www.urano-ken.com/blog/2013/02/25/installing-and-using-macr/" target="_blank">MacR</a>
   is defenitely the way to go!
 </p> <br/> <strong>Author</strong> <p>
-  <a href="" target="_blank">Tatenda Christian Rusere</a>
+  <a href="https://www.linkedin.com/in/mwangele-kaluba-126955a6/">Mwangele Kaluba</a>
   <br/>
   Finance Masters student
   <br/>
@@ -431,10 +426,10 @@ $(document).ready(function () {
   Johannesburg, South Africa
 </p> <br/> <strong>Need for more fancy statistics?</strong> <p>
   Mail to
-  <a href="mailto:tatendachristianrusere@gmail.com" target="_blank">tatendachristianrusere@gmail.com</a>
+  <a href="mailto:mwangelekaluba09@gmail.com" target="_blank">mwangelekaluba09@gmail.com</a>
 </p> <br/> <p>
   Whatsapp:
-  +27 61 764 4758
+  +27 79 830 7400
 </p> <p>
   <br/>
 </p>
@@ -448,7 +443,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

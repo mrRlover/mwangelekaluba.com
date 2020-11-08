@@ -22,6 +22,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -32,7 +34,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -384,7 +386,7 @@ symbols &lt;- substr(filenames, 1, 3)</code></pre>
 <p>Notice that the first line gets a list of filenames in the folder which have a .csv file extension. The filenames are then passed into a <code>map</code> call. This is essentially a loop under the hold, with the filenames being individually passed to the file argument of <code>read_csv()</code>. The <code>map</code> function returns a list of dataframes so <code>bind_cols</code> is used to make it one dataframe. Since this just combines the dataframes, the Dates column is duplicated. First, rename one of the duplicated Dates columns to date. Once that’s done, select date first to put it as a first column, the everything else with the <code>everything()</code> helper function and drop the duplicated dates columns (since all duplicated column names will have “…” in their column names).</p>
 <p>The function tk(date_var = date) converts the data frame to an xts object. Once everything is all said and done, have one final look at the prices object.</p>
 <pre class="r"><code>head(prices)</code></pre>
-<table class = kable>
+<table class = mTable>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -529,6 +531,7 @@ NPN
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>Next import is all the shares on the JSE, which will be used to create a trading strategy.</p>
 <pre class="r"><code>jse &lt;- read_xlsx(&quot;prices.xlsx&quot;)</code></pre>
 </div>
@@ -542,7 +545,7 @@ NPN
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
